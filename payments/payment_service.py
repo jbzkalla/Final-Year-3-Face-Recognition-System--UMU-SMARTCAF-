@@ -102,6 +102,10 @@ def delete_payment(payment_id):
     initial_len = len(payments)
     payments = [p for p in payments if p.get('id') != payment_id]
     
-    if len(payments) < initial_len:
-        return write_json(PAYMENTS_DB_FILE, payments)
-    return False
+
+def get_user_payments(user_id):
+    """
+    Returns all payment records for a specific user ID.
+    """
+    payments = get_all_payments()
+    return [p for p in payments if p.get('user_id') == user_id]

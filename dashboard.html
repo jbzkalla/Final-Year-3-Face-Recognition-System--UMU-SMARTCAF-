@@ -1807,8 +1807,8 @@
                 document.getElementById('stat-value-3').style.color = 'inherit';
                 document.getElementById('stat-value-4').style.color = 'inherit';
                 document.querySelector('.header__title').textContent = 'Student Portal';
-                // Student keeps default large spacing
-                if (sidebar) sidebar.classList.remove('sidebar--compact');
+                // Students now get the same premium compact spacing as admins
+                if (sidebar) sidebar.classList.add('sidebar--compact');
             } else {
                 // Admin/Staff get compact spacing
                 if (sidebar) sidebar.classList.add('sidebar--compact');

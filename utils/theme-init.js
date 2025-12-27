@@ -68,19 +68,7 @@
                         if (el) el.style.display = 'none';
                     });
 
-                    // 4. Create specific space between Dashboard, Menu, and Logout (as per request)
-                    const studentStyle = document.createElement('style');
-                    studentStyle.textContent = `
-                        .nav__list { 
-                            row-gap: 3.5rem !important; 
-                            margin-top: 2rem !important; 
-                        }
-                        .sidebar__footer { 
-                            margin-top: 3.5rem !important; 
-                            padding-top: 0 !important;
-                        }
-                    `;
-                    document.head.appendChild(studentStyle);
+
                 }
             }
 
