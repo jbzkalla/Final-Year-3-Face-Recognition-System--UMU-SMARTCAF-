@@ -73,9 +73,11 @@
 
     .login {
       position: relative;
-      height: 100vh;
-      display: grid;
+      min-height: 100vh;
+      display: flex;
       align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
     }
 
     .login__img {
@@ -91,11 +93,13 @@
       position: relative;
       background-color: var(--glass-bg);
       border: 2px solid var(--glass-outline);
-      margin-inline: 1.5rem;
+      width: 100%;
+      max-width: 450px;
       padding: 2.5rem 1.5rem;
       border-radius: 1.5rem;
       backdrop-filter: blur(var(--card-blur));
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      margin: auto;
     }
 
     .login__title {
@@ -213,12 +217,7 @@
     }
 
     @media screen and (min-width: 576px) {
-      .login {
-        justify-content: center;
-      }
-
       .login__form {
-        width: 450px;
         padding: 4rem 3rem;
       }
     }
@@ -424,7 +423,7 @@
       }
 
       .sidebar__footer {
-        display: none !important;
+        display: flex !important;
       }
 
       .main-content {
@@ -492,13 +491,10 @@
     @media screen and (max-width: 576px) {
       .login {
         padding: 1rem !important;
-        justify-content: center !important;
       }
 
       .login__form {
-        width: 100% !important;
-        max-width: 450px !important;
-        padding: 3rem 2rem !important;
+        padding: 2.5rem 1.5rem !important;
       }
     }
 

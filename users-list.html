@@ -799,7 +799,7 @@
             }
 
             .sidebar__footer {
-                display: none !important;
+                display: flex !important;
             }
 
             .main-content {
@@ -1620,6 +1620,14 @@
                         <input type="text" id="user-search" class="search-input"
                             placeholder="Search by name, ID or email...">
                     </div>
+                    <div class="filter-box">
+                        <select id="role-filter" class="search-input" style="padding-left: 1rem; max-width: 150px;">
+                            <option value="all">All Roles</option>
+                            <option value="admin">Admin</option>
+                            <option value="staff">Staff</option>
+                            <option value="student">Student</option>
+                        </select>
+                    </div>
                 </div>
 
                 <table class="user-table">
@@ -1760,15 +1768,24 @@
         }
 
         const searchInput = document.getElementById('user-search');
-        searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            const filtered = allUsers.filter(u =>
-                u.id.toLowerCase().includes(term) ||
-                u.name.toLowerCase().includes(term) ||
-                u.email.toLowerCase().includes(term)
-            );
+        const roleFilter = document.getElementById('role-filter');
+
+        function applyFilters() {
+            const term = searchInput.value.toLowerCase();
+            const role = roleFilter.value.toLowerCase();
+
+            const filtered = allUsers.filter(u => {
+                const matchesSearch = u.id.toLowerCase().includes(term) ||
+                    u.name.toLowerCase().includes(term) ||
+                    u.email.toLowerCase().includes(term);
+                const matchesRole = role === 'all' || u.role.toLowerCase() === role;
+                return matchesSearch && matchesRole;
+            });
             renderUsers(filtered);
-        });
+        }
+
+        searchInput.addEventListener('input', applyFilters);
+        roleFilter.addEventListener('change', applyFilters);
 
         fetchUsers();
 
