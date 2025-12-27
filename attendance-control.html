@@ -1624,7 +1624,7 @@
                     const sidebar = document.querySelector('.sidebar');
                     if (role === 'student') {
                         if (sidebar) sidebar.classList.add('sidebar--compact');
-                        ['nav-users', 'nav-attendance', 'nav-finance', 'nav-menu-mgmt', 'nav-reports', 'nav-settings', 'nav-training', 'nav-feedback-list'].forEach(id => {
+                        ['nav-users', 'nav-attendance', 'nav-finance', 'nav-menu-mgmt', 'nav-reports', 'nav-settings', 'nav-feedback-list'].forEach(id => {
                             const el = document.getElementById(id);
                             if (el) el.style.display = 'none';
                         });

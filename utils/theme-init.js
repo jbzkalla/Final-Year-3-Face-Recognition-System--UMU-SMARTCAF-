@@ -26,13 +26,13 @@
         .role-student .admin-only,
         .role-student #nav-users, .role-student #nav-attendance, 
         .role-student #nav-finance, .role-student #nav-reports, 
-        .role-student #nav-settings, .role-student #nav-training, 
-        .role-student #nav-menu-mgmt, .role-student #nav-feedback-list {
+        .role-student #nav-settings, .role-student #nav-menu-mgmt, 
+        .role-student #nav-feedback-list {
             display: none !important;
         }
 
         /* Show student elements if role is student */
-        .role-student .student-only, .role-student #nav-feedback {
+        .role-student .student-only, .role-student #nav-feedback, .role-student #nav-training {
             display: flex !important;
         }
 
