@@ -1,0 +1,66 @@
+[
+    {
+        "id": "e921eb23-75cb-407f-b4c1-8b3f4b738af6",
+        "name": "mango juice",
+        "category": "Drink",
+        "description": "Sweet and refreshing mango juice made from fresh Ugandan mangoes.",
+        "image_path": "data/menu_images/e921eb23-75cb-407f-b4c1-8b3f4b738af6_pexels-kowalievska-1393302.jpg",
+        "price": 2000,
+        "ratings": {
+            "likes": 6,
+            "dislikes": 3
+        },
+        "time_served": "Lunch",
+        "date": "2025-12-24",
+        "is_available": true,
+        "created_at": "2025-12-23T06:13:59.146458"
+    },
+    {
+        "id": "c2bab146-952d-4731-8576-41fc8911eb29",
+        "name": "Chips fries",
+        "category": "Meal",
+        "description": "Golden crispy potato fries served with tomato ketchup and a side of salad.",
+        "image_path": "data/menu_images/c2bab146-952d-4731-8576-41fc8911eb29_pexels-kalz-michael-1277172-2498440.jpg",
+        "price": 5000,
+        "ratings": {
+            "likes": 1,
+            "dislikes": 1
+        },
+        "time_served": "Supper",
+        "date": "2025-12-24",
+        "is_available": true,
+        "created_at": "2025-12-23T06:15:59.753172"
+    },
+    {
+        "id": "0044eab9-e404-4122-9cd2-307fb065dabd",
+        "name": "Cold Coca Cola soda",
+        "category": "Meal",
+        "description": "Cold Coca Cola soda sold at 1,000/=",
+        "image_path": "data/menu_images/0044eab9-e404-4122-9cd2-307fb065dabd_pexels-asphotography-104509.jpg",
+        "price": 1000,
+        "ratings": {
+            "likes": 1,
+            "dislikes": 2
+        },
+        "time_served": "Breakfast",
+        "date": "2025-12-24",
+        "is_available": true,
+        "created_at": "2025-12-24T10:08:43.025771"
+    },
+    {
+        "id": "f2f0906c-b416-4259-8dd4-7a01bb3763cb",
+        "name": "Fried Rice",
+        "category": "Meal",
+        "description": "Very delicious fried brown rice ",
+        "image_path": "data/menu_images/f2f0906c-b416-4259-8dd4-7a01bb3763cb_pexels-bishop-tamrakar-2246201-3926133.jpg",
+        "price": 0,
+        "ratings": {
+            "likes": 0,
+            "dislikes": 0
+        },
+        "time_served": "Lunch",
+        "date": "2025-12-26",
+        "is_available": true,
+        "created_at": "2025-12-26T09:17:04.054419"
+    }
+]
