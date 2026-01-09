@@ -1,0 +1,18 @@
+{
+    "canteen_name": "UMU SmartCaf",
+    "operating_year": "2025",
+    "theme": "dark",
+    "email_notifications": true,
+    "max_login_attempts": "3",
+    "session_timeout": "15",
+    "enable_2fa": true,
+    "admin_auth_training": true,
+    "confidence_threshold": "75",
+    "camera_source": "0",
+    "liveness_detection": true,
+    "spending_limit": "50000",
+    "low_balance_warning": "5000",
+    "auto_invoicing": true,
+    "backup_schedule": "daily",
+    "retention_days": "365"
+}

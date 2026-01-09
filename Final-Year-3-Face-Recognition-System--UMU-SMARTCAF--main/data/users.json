@@ -1,0 +1,443 @@
+[
+    {
+        "id": "UMUSTUD20250001",
+        "name": "NANKINGA MARIA",
+        "email": "nankinga.maria@stud.umu.ac.ug",
+        "role": "Student",
+        "department": "ENG",
+        "password_hash": "f949b88e428cfac5e5d825cccc34527921afb47896a9aebf53fd08c95fc9619d6a5e47b7e90175894aabcfc9554909d446500386e48668c9dfde1086d79eb83b",
+        "created_at": "2025-12-16 19:23:22"
+    },
+    {
+        "id": "UMUSTAF20250001",
+        "name": "NANNYONJO MARIA CABRINE",
+        "email": "nannyonjo.cabrine@staff.umu.ac.ug",
+        "role": "Staff",
+        "department": "ENG",
+        "password_hash": "381805843f4c0bc65203ef5f5ef315b47e14fcda7092798ac985cd01561d45d46212d5a00c50574fa0a48faf11490a6820aaa39b8166369911160ee5c7c32d0d",
+        "created_at": "2025-12-16 19:23:22"
+    },
+    {
+        "id": "UMUSTUD20250002",
+        "name": "NAMAZZI JACKLINE",
+        "email": "namazzi.jackline@stud.umu.ac.ug",
+        "role": "Student",
+        "department": "EDU",
+        "password_hash": "3dd3646b81cd72654d824ebb8d7c89ce75667ca24154af6d1e32ed5de9ff5823c9cc6d74c609088cc061ac5c48263da2d3080a9ea95975c4b99cf9a6f71a0233",
+        "created_at": "2025-12-16 19:23:22"
+    },
+    {
+        "id": "UMUSTUD20250003",
+        "name": "KHAINZA MARY CHRISTINE",
+        "email": "khainza.christine@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "d01f5a2059fc256b8ca94970b998d8934039f83af0cd4bebb4990f5413a4659a025b44fc6543ee760649e6df7f41dc9b046ad9e8608e206f94e1e53affc638a0",
+        "created_at": "2025-12-16 19:23:22"
+    },
+    {
+        "id": "UMUSTAF20250002",
+        "name": "MWEBESA JOHNSON",
+        "email": "mwebesa.johnson@staff.umu.ac.ug",
+        "role": "Staff",
+        "department": "ENG",
+        "password_hash": "f48207c038ac79145067ae455f8357fe818e92a4be94890bf85c1f9410ac2938eb2434a2e70da206325d4a3a5d0695ff0ff216fb3cdc75da9947b37a64900ea3",
+        "created_at": "2025-12-16 19:23:23"
+    },
+    {
+        "id": "UMUSTUD20250004",
+        "name": "OBONG JOSEPH",
+        "email": "obong.joseph@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "967c0199743aa34d057e61bb74403bace35b6407042958e3874ad57c9d1eedcd6be9b26421706c0a5704b1cbf931641f21afc3b5d3bd380419cc9272b26a00cb",
+        "created_at": "2025-12-16 19:23:23"
+    },
+    {
+        "id": "UMUADMIN20250001",
+        "name": "KIJJIBO ADRIAN JAMES",
+        "email": "kijjibo.james@admin.umu.ac.ug",
+        "role": "Admin",
+        "department": "EDU",
+        "password_hash": "5dbe10292024a2cea289e50547da81ce223f107a69ad131d0cc05af2e606d0d39c7edf184c1802b5b71a72aa87a83d560098d94ae30c380ca630a09c4ba245cf",
+        "created_at": "2025-12-16 19:23:23"
+    },
+    {
+        "id": "UMUSTAF20250003",
+        "name": "SIIMA DIANA",
+        "email": "siima.diana@staff.umu.ac.ug",
+        "role": "Staff",
+        "department": "BUS",
+        "password_hash": "5537ca5befdaf661eef1094f7b8e37fd6225f3b9207657787c02d21ff05fb67e5abd1f33ea379b877290db947df2b7b6c07541370ad4dcc657db4b888e8ff171",
+        "created_at": "2025-12-16 19:23:23"
+    },
+    {
+        "id": "UMUSTUD20250005",
+        "name": "KUTOSI MARK",
+        "email": "kutosi.mark@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "bfc8bf281ef341e5db5f0f5a05c1fe938bdaceb655149f2a9f26732503e249287f1289c1899383aa504d3b52a001ed0978d071ceb71d7d86a7c110ff2ebea35b",
+        "created_at": "2025-12-16 19:23:23"
+    },
+    {
+        "id": "UMUSTUD20250006",
+        "name": "LUBANGAKENE JONATHAN",
+        "email": "lubangakene.jonathan@stud.umu.ac.ug",
+        "role": "Student",
+        "department": "CS",
+        "password_hash": "03631543f702e928dda33aeab549c34f17ede4e59ce4722c258775102bd471cd0aca9b83ba2b5100133b687233363839495593ebc87f24b055afcbbe0701ac10",
+        "created_at": "2025-12-16 19:23:24"
+    },
+    {
+        "id": "UMUSTUD20250007",
+        "name": "MASAABA EVANS HENRY",
+        "email": "masaaba.henry@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "f0f1cc9c7b40a2159e7b9cd4a3719221d903831141c3c61fed3c36889732f4e688eafe53c384e5c7b4343b53b5cbf3a57d2be9d906728b4b242e1858721ccd50",
+        "created_at": "2025-12-16 19:23:24"
+    },
+    {
+        "id": "UMUSTUD20250008",
+        "name": "TUSIIME JENINAH",
+        "email": "tusiime.jeninah@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "819af2312bfd0b73f9015b9c966c620d753cb671792bcc61e51224252678c56643df04055323c563d2db7ca18571125eaf6355da065769e7e1cb03fe6eff8860",
+        "created_at": "2025-12-16 19:23:24"
+    },
+    {
+        "id": "UMUSTUD20250009",
+        "name": "MATOVU ALEX",
+        "email": "matovu.alex@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "4b27e3ecbdc099a86af5ce83dd0da48a1275e49c9601bce7152647bd1b728771d4f435399e0a497eb4b1b42a03bb927cc4c9a379a9ee0d823a3cead9033eed3f",
+        "created_at": "2025-12-16 19:23:24"
+    },
+    {
+        "id": "UMUSTUD20250010",
+        "name": "SSIMBWA DERICK",
+        "email": "ssimbwa.derick@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "94163d4d807a8bf4598384e5395a365406bb0fe980be15395ed0607020b53f12e1cfb4ff412fcc95ef4577d251e710590e95d55bff7e93dab8ae028f09e06bc1",
+        "created_at": "2025-12-16 19:23:24"
+    },
+    {
+        "id": "UMUSTUD20250011",
+        "name": "NASSEJJE ANNA MARIA",
+        "email": "nassejje.maria@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "b6c297e3c626545134ca653495ff25156ded7690c68d708878c74961a5f96cd7b7b5a50cbcb140b993c4bccbf88c4632ae63eafb535c790100282623e490efa6",
+        "created_at": "2025-12-16 19:23:25"
+    },
+    {
+        "id": "UMUSTUD20250012",
+        "name": "KATISI STELLA",
+        "email": "katisi.stella@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "5ccbff201a76aaf7f03579a591dfe9684f83757c691aeccf69356cd252053805f3bceb566aa35402302005e21c7990ed08e0f5d326b2e35dfb12dbc5bf9f109e",
+        "created_at": "2025-12-16 19:23:25"
+    },
+    {
+        "id": "UMUSTUD20250013",
+        "name": "AYEBALE JOHN",
+        "email": "ayebale.john@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "60cb421423a838b37dd921ee77c8b3f4f2662c9e00530c791689dd97e26ad9f598994b27159232bccd5ab000500a471aff7bdb7d0eeed801963cd1693240ad88",
+        "created_at": "2025-12-16 19:23:25"
+    },
+    {
+        "id": "UMUSTUD20250014",
+        "name": "SSENKAAYI VIANNEY JOHN M",
+        "email": "ssenkaayi.m@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "089835ec5ee85bceba64639baa370e3dd874fe99350eacd07ece183503f7b04e29fae158968fe3ca8b0a0da1d62348f875157581b92a9725ce72fd7a75275d9e",
+        "created_at": "2025-12-16 19:23:25"
+    },
+    {
+        "id": "UMUSTUD20250015",
+        "name": "AHURRA HILDAH",
+        "email": "ahurra.hildah@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "eac302a138bc332664c5b56e3390b4d6b36e3d2b6645daef2bfaef501c4fd50b64a17aa4b03994e53d8125e0a004a2857f8d73327c8ac9d625e9b093bd89b4ba",
+        "created_at": "2025-12-16 19:23:26"
+    },
+    {
+        "id": "UMUSTUD20250016",
+        "name": "BONITA ALINDA PURITY",
+        "email": "bonita.purity@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "1fc68e8ce82b3527d8be575a1161c66c0ab4af9d8686c2c4ede68569bbfbe257c9117564851b12488a842990c719ca99339ac6a2803c477095c57474b0c0e269",
+        "created_at": "2025-12-16 19:23:26"
+    },
+    {
+        "id": "UMUSTAF20250004",
+        "name": "PANDE AZIZI",
+        "email": "pande.azizi@staff.umu.ac.ug",
+        "role": "Staff",
+        "department": "CS",
+        "password_hash": "6612579d6fec9a04f3712bfa1e9ffa641e83bd7ec551c9d2a08d4a777025a254f917fe388c8d70c3ac59314d60d94b4dbb9efbbebd531c78a26d4be2a4434c82",
+        "created_at": "2025-12-16 19:23:26"
+    },
+    {
+        "id": "UMUSTUD20250017",
+        "name": "KAYOORO P. PAUL",
+        "email": "kayooro.paul@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "887545a7a02dc8defd92ff44785cf0ceefcbb5a45c3595ce3c8f826d8ea159e90c4a01a04f87e95389e3cc2965881d5f9e7b6c6b1d2112c06688f23c90b006fc",
+        "created_at": "2025-12-16 19:23:26"
+    },
+    {
+        "id": "UMUSTUD20250018",
+        "name": "NAKAWEESI ESTHER",
+        "email": "nakaweesi.esther@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "f9555aa14be0814ca54b08869db13ca76233c0e2d75568a6816671a66117d5f2ef1bf171ce01e7ad9210fd2328ff07a171ec7f10fc134a0b8473f7f962238aba",
+        "created_at": "2025-12-16 19:23:26"
+    },
+    {
+        "id": "UMUSTUD20250019",
+        "name": "Kyateka Given Ethan",
+        "email": "kyateka.ethan@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "0217ac5223c291ac8a94ce3e1525e51ee249d461466366ba90f301eb2f74e92c452e877d548628002569abf7152de1918fbcc625f9b2f76169ac1d631c8497b9",
+        "created_at": "2025-12-16 19:23:27"
+    },
+    {
+        "id": "UMUSTUD20250020",
+        "name": "Berinka Lyse Bella",
+        "email": "berinka.bella@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "b8613b7675c2eec4a1a0b4b801693e5587c003c65240088bbea2035fac459c9d5da2bd8a276fe9899982f1ebabc4c1ee93695153830d9a98a459ee979ea550fc",
+        "created_at": "2025-12-16 19:23:27"
+    },
+    {
+        "id": "UMUSTUD20250021",
+        "name": "Yiga Ian",
+        "email": "yiga.ian@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "0bb6c6b175f75d818ceedae73b7f74d22d0f5294a124f74915d1289d04339a9d7fb4ce42a1a1fcfc3526b5dc47e6917c74f5ec2304a910b181b860d338425e47",
+        "created_at": "2025-12-16 19:23:27"
+    },
+    {
+        "id": "UMUSTUD20250022",
+        "name": "KATEREGGA JOSEPH TRAVOUR",
+        "email": "kateregga.travour@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "42df2ed8cf3122010c6b88a327eb17e481f33105ce6f95b6f32c50fed9752212b6e74629b5c07ccd7bfe7684fe92197996dd81b5c15323f4621c23fbd0ae648e",
+        "created_at": "2025-12-16 19:23:27"
+    },
+    {
+        "id": "UMUSTUD20250023",
+        "name": "SEKIMPI JAMES EDWARD",
+        "email": "sekimpi.edward@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "6268d34555c3d499353b85899596b790096d43fd5125829d29c6e37257c830d6b5719bc8abe1ed8008d7c1b6fe00e21747411260caac92263db3a5a06e910327",
+        "created_at": "2025-12-16 19:23:27"
+    },
+    {
+        "id": "UMUSTUD20250024",
+        "name": "KONIHIIRE SHARON",
+        "email": "konihiire.sharon@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "300091114926c22d8f687aaa83e74983b060e654102fcb80ec1ff443e0635d73843211829ae7df80a5b0b69348efab46c9cd2a2e338e3de3fa8692cba7acfcab",
+        "created_at": "2025-12-16 19:23:27"
+    },
+    {
+        "id": "UMUSTUD20250025",
+        "name": "KATUSIIME ROMINATE",
+        "email": "katusiime.rominate@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "d321a96836f72ee5393de0c211b5a3015346696c8b05decf94553355b58436327cfb0d36bb1c6fd515ad6ff4d23f67eee75ad9725ae86c7bbe636373274bea97",
+        "created_at": "2025-12-16 19:23:28"
+    },
+    {
+        "id": "UMUADMIN20250002",
+        "name": "ABENAWE RACHEAL",
+        "email": "abenawe.racheal@admin.umu.ac.ug",
+        "role": "Admin",
+        "department": "BUS",
+        "password_hash": "dce7ad5de3a9ccdeddc18d945e6d7ca50124cf2755d470d2c1f7bea9f7163dfbde6586e81c01a8c423ef5a95c4a7514feef737eb95d2b9252657ed116797703a",
+        "created_at": "2025-12-16 19:23:28"
+    },
+    {
+        "id": "UMUSTUD20250026",
+        "name": "Mudiima Leon Noel",
+        "email": "mudiima.noel@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "ffb5cf25595f2c1ca243c2ff518b6599a49c676790fc419fe1f6ff366a91ce21faead6a475b6d45c4208644ca18e5cbe26f5418d59471e0f3bb57a29377a2d69",
+        "created_at": "2025-12-16 19:23:28"
+    },
+    {
+        "id": "UMUSTUD20250027",
+        "name": "Basaija Jireh",
+        "email": "basaija.jireh@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "aa4ac1dad34cd3e1c3b172d0ef0ce81128b90dc92790f8a5f34da7179c49b7e4d4467d5520dd5a454b788924dc7ece25b653b2d19c0dcdae2cb5fbf8891af71d",
+        "created_at": "2025-12-16 19:23:28"
+    },
+    {
+        "id": "UMUSTUD20250028",
+        "name": "Mambo Emmanuel Taban",
+        "email": "mambo.taban@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "69a9a6aa15d6e8144c768fa5e76ef84ef35c2a1318f109cb2726d013ddb3582fd70445b9b8a6f192b105718f38f2026a456fa35a138cdaed2dac09bf55482600",
+        "created_at": "2025-12-16 19:23:29"
+    },
+    {
+        "id": "UMUSTUD20250029",
+        "name": "Kinene Joseph",
+        "email": "kinene.joseph@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "b6bb749a74bdf2a3fb5ad03edb9c8b9fbd5e2956585b46bc3e8e6de404767113ae3e13297450a39a30277e68c044094c17eb982f9003487ba7ee05127ad740ba",
+        "created_at": "2025-12-16 19:23:29"
+    },
+    {
+        "id": "UMUADMIN20250003",
+        "name": "Kato Joseph Bwanika",
+        "email": "kato.bwanika@admin.umu.ac.ug",
+        "role": "Admin",
+        "department": "CS",
+        "password_hash": "88e00e047ac77592ce364bf630057a6ba0d62cff276cfd7022f6064fbac54de16c4ded767d00f608333cfb2d2fb6c3bd4884f84f50c0ae75a17615d617f1df52",
+        "created_at": "2025-12-16 19:23:29"
+    },
+    {
+        "id": "UMUSTUD20250030",
+        "name": "Rutatina Francis",
+        "email": "rutatina.francis@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "8d13398db2710aac80e3526f018239963609a9e15e11bb51c30017533f140afc9fed1a71260e8b42f839416b2820c3ca9ee51ff1ae0cf833b3acaa1af4341df8",
+        "created_at": "2025-12-16 19:23:29"
+    },
+    {
+        "id": "UMUSTUD20250031",
+        "name": "Ocaya Isaac",
+        "email": "ocaya.isaac@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "de0e5c2325d8766177bda62bad55f6c6b03b1a20e06893db1639dbc3d43b04e5d1ed4d90e074f9cceefcdd6c5da1683b70b73be6bc5af5bbf7950d821456b215",
+        "created_at": "2025-12-16 19:23:29"
+    },
+    {
+        "id": "UMUSTUD20250032",
+        "name": "NTEGE MARTIN",
+        "email": "ntege.martin@stud.umu.ac.ug",
+        "role": "Staff",
+        "department": "BUS",
+        "password_hash": "da9532ab077e220689cf5ae7179d8ed43c21b12811ebda29569fb3c100e66c51af78774fc1dc205fc4c3ca5954ec8fd6e672d0e2437816b18904ccd515fe8be2",
+        "created_at": "2025-12-16 19:23:29"
+    },
+    {
+        "id": "UMUSTUD20250033",
+        "name": "MUHEREZA EMMANUEL",
+        "email": "muhereza.emmanuel@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "c4c0f1e1fd8730c2d57a845439ed867ff1685a76b2168666b7503271150e9f65b28f0136a5a7285881e15981de8e3dd87ad351f021306594aa47c0d0dd1d0e7b",
+        "created_at": "2025-12-16 19:23:30"
+    },
+    {
+        "id": "UMUSTUD20250034",
+        "name": "NAMYALO ASHIL NOELINE",
+        "email": "namyalo.noeline@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "b02e7df5af1125c5b8a53f7f1f7dc35fea2566a4023c4e94c70b4d9b7cbfe81293097f7c947c0e1599932fef971bfc5b47310d1c1d7100c5d00787e15562e463",
+        "created_at": "2025-12-16 19:23:30"
+    },
+    {
+        "id": "UMUSTAF20250005",
+        "name": "Dr. Ssewanyana Paul",
+        "email": "dr.paul@staff.umu.ac.ug",
+        "role": "Staff",
+        "department": "EDU",
+        "password_hash": "21c8d7487ba4cdcf842124b8f023bda588b0135a91b79ef38d959869cc5a1f331e66cd64e731e5c2ebd5c79871ce746ff2d8da24288b18d494655e197eda67b8",
+        "created_at": "2025-12-16 19:23:30"
+    },
+    {
+        "id": "UMUSTUD20250035",
+        "name": "Ms. Namusoke Juliet",
+        "email": "ms.juliet@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "a63c61c413ce6983e89d84be63bcb97c71c1eebc24b482433962c9f8c310b1a7d39c4e1d5d4d407a8e619ad65a88332ca3ef36cbde97ad415af37ddaf2e90629",
+        "created_at": "2025-12-16 19:23:31"
+    },
+    {
+        "id": "UMUSTUD20250036",
+        "name": "Mr. Kato Brian",
+        "email": "mr.brian@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "2264dc34079ee646665e6b876b046eedd0aa8cf986e267fc2831f587d4bbb8a133b7463fa602b95d752b058db0c15b23e3c4fd0927dedec594e4f9a45d8a487e",
+        "created_at": "2025-12-16 19:23:31"
+    },
+    {
+        "id": "UMUSTUD20250037",
+        "name": "Mrs. Nakato Sarah",
+        "email": "mrs.sarah@stud.umu.ac.ug",
+        "role": "student",
+        "department": "Students",
+        "password_hash": "d11fb1a696aee3ee1e4e10e384073f4ea985ff70efbdd7714adf79a932fdb5e14467cbb903bad6cc6df732af7f96bb396ed6999959680b12f7e8bf77ec760be1",
+        "created_at": "2025-12-16 19:23:31"
+    },
+    {
+        "id": "UMUADMIN20250004",
+        "name": "Dr. Mirembe Annet",
+        "email": "dr.annet@admin.umu.ac.ug",
+        "role": "Admin",
+        "department": "ENG",
+        "password_hash": "002835e3bd1061dada5240af0ee706915db4e693232c342219ccee6bc9a59fb9cc564152a65eb987b96080c8a5dc706c2f1ce295ceed19704da71efcf50266b9",
+        "created_at": "2025-12-16 19:23:31"
+    },
+    {
+        "id": "UMUSTAF20250006",
+        "name": "Babirye Joan Namayengo",
+        "email": "babirye.namayengo@staff.umu.ac.ug",
+        "role": "Staff",
+        "department": "ENG",
+        "password_hash": "a115e99eced14c11d2ed0cfbc567491b923b33a1e1730d43fb15d5174440e7ae275b47a9193e4598e7bcdc91ad2c63846713feb9eba915723b937235a09d92f3",
+        "created_at": "2025-12-18 19:04:35"
+    },
+    {
+        "id": "UMUSTAF20250007",
+        "name": "KIJJIBO ADRIAN JAMES",
+        "email": "kijjibo.james@staff.umu.ac.ug",
+        "role": "Staff",
+        "department": "BUS",
+        "password_hash": "6e26487bf8f0b1e10e6503701401942ef5c81a64795c7b41627c5a734a9306a7295b621e87ca8cb077a3aef5d61882301923dda3969523133094a92e07b768c0",
+        "created_at": "2025-12-21 10:51:30"
+    },
+    {
+        "id": "UMUSTAF20250008",
+        "name": "Willian Mark lule",
+        "email": "willian.mark@staff.umu.ac.ug",
+        "role": "staff",
+        "department": "",
+        "password_hash": "7094679cadf0107edad87b973863789277b1f2d6b669fe268c81169cd993a12d58bf801b181414550ec1ae06e12ca186e2c9d79c1f88f8cdb7bdaa0f147d9fec",
+        "created_at": "2025-12-21 16:56:18"
+    }
+]

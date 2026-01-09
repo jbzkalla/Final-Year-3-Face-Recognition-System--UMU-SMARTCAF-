@@ -1,0 +1,62 @@
+[
+    {
+        "timestamp": "2025-12-26T09:17:04.071139",
+        "user": "admin@umu.ac.ug",
+        "action": "ADD_MEAL",
+        "details": "Added Fried Rice (ID: f2f0906c-b416-4259-8dd4-7a01bb3763cb)"
+    },
+    {
+        "timestamp": "2025-12-26T09:28:58.083899",
+        "user": "admin@umu.ac.ug",
+        "action": "BULK_TOGGLE",
+        "details": "Set 1 items in All to False"
+    },
+    {
+        "timestamp": "2025-12-26T09:29:04.820664",
+        "user": "admin@umu.ac.ug",
+        "action": "BULK_TOGGLE",
+        "details": "Set 1 items in All to False"
+    },
+    {
+        "timestamp": "2025-12-26T09:38:14.495048",
+        "user": "admin@umu.ac.ug",
+        "action": "BULK_TOGGLE",
+        "details": "Set 1 items in All to False"
+    },
+    {
+        "timestamp": "2025-12-26T09:38:21.210053",
+        "user": "admin@umu.ac.ug",
+        "action": "BULK_TOGGLE",
+        "details": "Set 1 items in All to False"
+    },
+    {
+        "timestamp": "2025-12-26T09:38:37.970514",
+        "user": "admin@umu.ac.ug",
+        "action": "BULK_TOGGLE",
+        "details": "Set 1 items in All to False"
+    },
+    {
+        "timestamp": "2025-12-26T09:38:58.527108",
+        "user": "admin@umu.ac.ug",
+        "action": "BULK_TOGGLE",
+        "details": "Set 1 items in All to False"
+    },
+    {
+        "timestamp": "2025-12-26T09:44:39.792901",
+        "user": "admin@umu.ac.ug",
+        "action": "BULK_TOGGLE",
+        "details": "Set 4 items in All to False"
+    },
+    {
+        "timestamp": "2025-12-26T09:44:51.854417",
+        "user": "admin@umu.ac.ug",
+        "action": "BULK_TOGGLE",
+        "details": "Set 4 items in All to False"
+    },
+    {
+        "timestamp": "2025-12-26T09:53:25.198794",
+        "user": "admin@umu.ac.ug",
+        "action": "BULK_TOGGLE",
+        "details": "Set 4 items in All to False"
+    }
+]

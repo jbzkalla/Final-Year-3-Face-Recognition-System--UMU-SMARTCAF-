@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - UMU SmartCaf</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+    <script src="utils/theme-init.js"></script>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+        :root {
+            --white-color: #ffffff;
+            --black-color: #000000;
+            --body-font: "Poppins", sans-serif;
+            --h1-font-size: 1.75rem;
+            --normal-font-size: 1rem;
+            --small-font-size: .813rem;
+            --font-medium: 500;
+            --font-semi-bold: 600;
+
+            /* Default Dark Theme Settings */
+            --glass-bg: hsla(0, 0%, 10%, 0.5);
+            --glass-border: 2px solid hsla(0, 0%, 100%, 0.2);
+            --text-color: #ffffff;
+            --bg-overlay: hsla(0, 0%, 0%, 0.2);
+            --glass-outline: #ffffff;
+            --card-blur: 8px;
+
+            --maroon-primary: #610a0a;
+            --maroon-deep: #821005;
+        }
+
+        [data-theme="light"] {
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: 1px solid rgba(0, 0, 0, 0.15);
+            --text-color: #000000;
+            --bg-overlay: rgba(255, 255, 255, 0.5);
+            --glass-outline: rgba(0, 0, 0, 0.2);
+            --white-color: #000000;
+            --black-color: #ffffff;
+            --card-blur: 15px;
+        }
+
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body,
+        input,
+        button {
+            font-size: var(--normal-font-size);
+            font-family: var(--body-font);
+        }
+
+        input,
+        button {
+            border: none;
+            outline: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .login {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .login__img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: -1;
+        }
+
+        .login__form {
+            position: relative;
+            background-color: var(--glass-bg);
+            border: 2px solid var(--glass-outline);
+            width: 100%;
+            max-width: 500px;
+            padding: 2.5rem 1.5rem;
+            border-radius: 1.5rem;
+            backdrop-filter: blur(var(--card-blur));
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            margin: auto;
+        }
+
+        .login__title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: var(--font-semi-bold);
+            margin-bottom: 2.5rem;
+            color: var(--text-color);
+        }
+
+        .login__content {
+            display: grid;
+            row-gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .login__box {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            align-items: center;
+            column-gap: 0.75rem;
+            border-bottom: 2px solid var(--glass-outline);
+        }
+
+        .login__icon,
+        .login__eye {
+            font-size: 1.25rem;
+            color: var(--text-color);
+        }
+
+        .login__input {
+            width: 100%;
+            padding-block: 0.8rem;
+            background: none;
+            color: var(--text-color);
+            position: relative;
+            z-index: 1;
+        }
+
+        .login__box-input {
+            position: relative;
+        }
+
+        .login__label {
+            position: absolute;
+            left: 0;
+            top: 13px;
+            font-weight: var(--font-medium);
+            transition: all 0.3s ease;
+            color: var(--text-color);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .login__eye {
+            position: absolute;
+            right: 0;
+            top: 18px;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        .login__input:focus+.login__label,
+        .login__input:not(:placeholder-shown)+.login__label {
+            top: -15px;
+            font-size: var(--small-font-size);
+            opacity: 1;
+        }
+
+        .login__button {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            background-color: var(--text-color);
+            color: var(--black-color);
+            font-weight: var(--font-semi-bold);
+            cursor: pointer;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .login__button:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .login__register {
+            text-align: center;
+            color: var(--text-color);
+        }
+
+        .login__register a {
+            color: var(--text-color);
+            font-weight: var(--font-semi-bold);
+            text-decoration: underline;
+        }
+
+        .sign {
+            text-align: center;
+            color: var(--text-color);
+            font-size: 0.75rem;
+            opacity: 0.8;
+            margin-top: 2rem;
+        }
+
+        @media screen and (min-width: 576px) {
+            .login__form {
+                padding: 4rem 3rem;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* Minimal Logo Branding Override */
+        .sidebar__logo-text,
+        .login__title {
+            color: #990000 !important;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* =========================================
+           RESPONSIVE DESIGN SYSTEM (MOBILE FIRST)
+           ========================================= */
+
+        /* Fluid Typography & Spacing Overrides */
+        :root {
+            --h1-font-size: clamp(1.5rem, 5vw, 2.25rem);
+            --normal-font-size: clamp(0.875rem, 2vw, 1rem);
+            --small-font-size: clamp(0.75rem, 1.5vw, 0.813rem);
+        }
+
+        /* Global Responsive Resets */
+        img,
+        video,
+        canvas,
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Touch Target Optimization */
+        .nav__link,
+        .btn,
+        .btn-primary,
+        .btn-secondary,
+        .btn-action,
+        .settings-tab,
+        input,
+        select,
+        .toggle-switch {
+            min-height: 44px;
+            cursor: pointer;
+        }
+
+        /* Responsive Dashboard Layout */
+        @media screen and (max-width: 767px) {
+            body {
+                overflow-y: auto !important;
+            }
+
+            .dashboard {
+                flex-direction: column !important;
+                height: auto !important;
+                min-height: 100vh !important;
+                overflow-y: visible !important;
+                display: flex !important;
+            }
+
+            .sidebar {
+                width: 100% !important;
+                height: auto !important;
+                padding: 1.25rem 1rem 0.5rem !important;
+                border-right: none !important;
+                border-bottom: var(--glass-border);
+                position: sticky !important;
+                top: 0;
+                z-index: 2000 !important;
+                flex-direction: column !important;
+                background-color: hsla(210, 30%, 8%, 0.98) !important;
+                backdrop-filter: blur(15px) !important;
+                flex-shrink: 0 !important;
+            }
+
+            .sidebar__logo {
+                margin-bottom: 0.75rem !important;
+                justify-content: center;
+            }
+
+            .nav__list {
+                flex-direction: row !important;
+                overflow-x: auto !important;
+                padding-bottom: 0.75rem !important;
+                column-gap: 0.75rem !important;
+                row-gap: 0 !important;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                display: flex !important;
+            }
+
+            .nav__list::-webkit-scrollbar {
+                display: none;
+            }
+
+            .nav__link {
+                padding: 0.6rem 1rem !important;
+                white-space: nowrap !important;
+                font-size: 0.85rem !important;
+                flex-shrink: 0 !important;
+                min-height: 48px !important;
+            }
+
+            .sidebar__footer {
+            margin-top: auto !important;
+                display: flex !important;
+            }
+
+            .main-content {
+                padding: 1rem !important;
+                flex: 1 0 auto !important;
+                width: 100% !important;
+            }
+
+            .header {
+                padding: 1.25rem !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 1.25rem !important;
+                margin-bottom: 1.5rem !important;
+                width: 100% !important;
+            }
+
+            .header__right {
+                width: 100%;
+                justify-content: space-between !important;
+                column-gap: 1rem !important;
+            }
+
+            /* Settings & Form Layouts */
+            .settings-layout {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            .settings-nav {
+                flex-direction: row !important;
+                overflow-x: auto !important;
+                padding-bottom: 0.5rem;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .settings-tab {
+                white-space: nowrap !important;
+            }
+
+            /* Grid & Layout Resets */
+            .content-grid,
+            .details-grid,
+            .status-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Tables Responsiveness */
+            .table-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            table {
+                min-width: 600px;
+            }
+        }
+
+        /* Responsive Login/Auth Layout */
+        @media screen and (max-width: 576px) {
+            .login {
+                padding: 1rem !important;
+            }
+
+            .login__form {
+                padding: 2.5rem 1.5rem !important;
+            }
+        }
+
+        /* Specific Breakpoints */
+
+        /* 1. Mobile (portrait): 320px to 479px */
+        @media screen and (min-width: 320px) and (max-width: 479px) {
+            .header__title {
+                font-size: 1.1rem !important;
+            }
+
+            .user-info {
+                display: none;
+            }
+
+            .clock {
+                font-size: 1rem !important;
+            }
+        }
+
+        /* 2. Mobile (landscape): 481px to 767px */
+        @media screen and (min-width: 481px) and (max-width: 767px) {
+            .nav__list {
+                justify-content: flex-start;
+            }
+
+            .header {
+                flex-direction: row !important;
+                align-items: center !important;
+            }
+        }
+
+        /* 3 & 4. Tablet (portrait & landscape): 768px to 1024px */
+        @media screen and (min-width: 768px) and (max-width: 1024px) {
+            .sidebar {
+                width: 220px !important;
+            }
+
+            .settings-layout {
+                grid-template-columns: 220px 1fr !important;
+            }
+
+            .main-content {
+                padding: 1.5rem !important;
+            }
+        }
+
+        /* Graceful Degradation & Fallbacks */
+        @media screen and (max-width: 280px) {
+            body {
+                font-size: 10px;
+            }
+
+            .sidebar__logo-text {
+                display: none;
+            }
+        }
+
+        /* Ensure images and media are responsive */
+        .card img,
+        .user-avatar img,
+        .logo-img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* =========================================
+           RESPONSIVE BACKGROUND IMAGE (FIXED & FULL COVER)
+           ========================================= */
+        .dashboard__img,
+        .login__img,
+        .register__img,
+        .auth__img {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            object-fit: cover !important;
+            object-position: center !important;
+            z-index: -1 !important;
+            pointer-events: none !important;
+            /* Support for high-res displays */
+            image-rendering: auto;
+        }
+
+        /* Ensure parent containers don't clip the fixed background */
+        body,
+        .dashboard,
+        .login {
+            background-color: transparent !important;
+            min-height: 100vh;
+        }
+
+        /* End Background Responsive */
+        /* End Responsive */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* Professional Designer Theme Overrides */
+
+        /* =========================================
+           0. GLOBAL FONT STANDARDIZATION
+           ========================================= */
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+        * {
+            font-family: 'Poppins', sans-serif !important;
+        }
+
+        /* =========================================
+           0.1 GLOBAL FONT SIZE STANDARDIZATION (Matching Reference)
+           ========================================= */
+        .header__title {
+            font-size: 1.5rem !important;
+            font-weight: 700 !important;
+        }
+
+        .clock {
+            font-size: 1.25rem !important;
+            font-weight: 600 !important;
+            letter-spacing: 1px !important;
+        }
+
+        .user-name {
+            font-size: 1rem !important;
+            font-weight: 600 !important;
+        }
+
+        .user-role {
+            font-size: 0.85rem !important;
+            opacity: 0.8 !important;
+        }
+
+        .user-avatar {
+            width: 45px !important;
+            height: 45px !important;
+            font-size: 1.1rem !important;
+            font-weight: 700 !important;
+        }
+
+        /* =========================================
+           0.2 GLOBAL SIDEBAR COMPACTNESS (Full Visibility)
+           ========================================= */
+        .sidebar {
+            padding: 1rem !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        .sidebar__logo {
+            margin-bottom: 1.25rem !important;
+        }
+
+        .nav__list {
+            row-gap: 0.25rem !important;
+        }
+
+        .nav__link {
+            padding: 0.5rem 0.75rem !important;
+            column-gap: 0.75rem !important;
+            font-size: 0.9rem !important;
+        }
+
+        .sidebar__logo-img {
+            width: 35px !important;
+        }
+
+        /* =========================================
+           1. PREMIUM DARK THEME (WHITE HEADERS & KEY STATS)
+           ========================================= */
+        :root:not([data-theme="light"]) body,
+        :root:not([data-theme="dark"]) body,
+        :root:not([data-theme="light"]) p,
+        :root:not([data-theme="light"]) label,
+        :root:not([data-theme="light"]) .input-label,
+        :root:not([data-theme="light"]) .clock,
+        :root:not([data-theme="light"]) .detail-label,
+        :root:not([data-theme="light"]) .help-text,
+        :root:not([data-theme="light"]) .meal-desc {
+            color: #ffffff !important;
+        }
+
+        :root:not([data-theme="light"]) h1,
+        :root:not([data-theme="light"]) h2,
+        :root:not([data-theme="light"]) h3,
+        :root:not([data-theme="light"]) h4,
+        :root:not([data-theme="light"]) .header__title,
+        :root:not([data-theme="light"]) .section-title,
+        :root:not([data-theme="light"]) .section-header span,
+        :root:not([data-theme="light"]) .card-header h2,
+        :root:not([data-theme="light"]) .card__title,
+        :root:not([data-theme="light"]) .card__value,
+        :root:not([data-theme="light"]) .setting-title,
+        :root:not([data-theme="light"]) .auth-title,
+        :root:not([data-theme="light"]) .login__title,
+        :root:not([data-theme="light"]) .login__label,
+        :root:not([data-theme="light"]) .login__register,
+        :root:not([data-theme="light"]) .login__forgot,
+        :root:not([data-theme="light"]) .sign,
+        :root:not([data-theme="light"]) .detail-value,
+        :root:not([data-theme="light"]) td,
+        :root:not([data-theme="light"]) .user-name,
+        :root:not([data-theme="light"]) .user-role,
+        :root:not([data-theme="light"]) .notif-text,
+        :root:not([data-theme="light"]) .notif-time,
+        :root:not([data-theme="light"]) .control-label,
+        :root:not([data-theme="light"]) .status-indicator,
+        :root:not([data-theme="light"]) .radio-option,
+        :root:not([data-theme="light"]) .meal-name,
+        :root:not([data-theme="light"]) .form-label,
+        :root:not([data-theme="light"]) th {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+        }
+
+        :root:not([data-theme="light"]) .nav__link.active,
+        :root:not([data-theme="light"]) .nav__link:hover {
+            background-color: #610a0a !important;
+            color: #ffffff !important;
+        }
+
+        :root:not([data-theme="light"]) .nav__icon,
+        :root:not([data-theme="light"]) .card__icon,
+        :root:not([data-theme="light"]) .clock,
+        :root:not([data-theme="light"]) .sidebar__logo-text,
+        :root:not([data-theme="light"]) .ri-checkbox-circle-line,
+        :root:not([data-theme="light"]) .ri-eye-line,
+        :root:not([data-theme="light"]) .header__subtitle,
+        :root:not([data-theme="light"]) .file-upload-area p,
+        :root:not([data-theme="light"]) .section-header a,
+        :root:not([data-theme="light"]) .meal-time,
+        :root:not([data-theme="light"]) i {
+            color: #ffd700 !important;
+        }
+
+        :root:not([data-theme="light"]) .vote-bar {
+            display: none !important;
+        }
+
+        /* =========================================
+           2. GLASS LIGHT THEME (TOTAL BLACK TEXT & BLUE ACCENTS)
+           ========================================= */
+        [data-theme="light"] body,
+        [data-theme="light"] p,
+        [data-theme="light"] .clock,
+        [data-theme="light"] .notif-text,
+        [data-theme="light"] .notif-time,
+        [data-theme="light"] .meal-desc {
+            color: #000000 !important;
+        }
+
+        /* EXHAUSTIVE BLACK TEXT RULE FOR ALL LABELS & HEADERS IN GLASS THEME */
+        [data-theme="light"] h1,
+        [data-theme="light"] h2,
+        [data-theme="light"] h3,
+        [data-theme="light"] h4,
+        [data-theme="light"] .section-title,
+        [data-theme="light"] .section-header span,
+        [data-theme="light"] .card-header h2,
+        [data-theme="light"] .card__title,
+        [data-theme="light"] .card__value,
+        [data-theme="light"] .setting-title,
+        [data-theme="light"] .auth-title,
+        [data-theme="light"] .login__title,
+        [data-theme="light"] .form-label,
+        [data-theme="light"] label,
+        [data-theme="light"] .input-label,
+        [data-theme="light"] .detail-label,
+        [data-theme="light"] .detail-value,
+        [data-theme="light"] .help-text,
+        [data-theme="light"] .login__label,
+        [data-theme="light"] th,
+        [data-theme="light"] td,
+        [data-theme="light"] .user-name,
+        [data-theme="light"] .user-role,
+        [data-theme="light"] .stat-value,
+        [data-theme="light"] .total-count,
+        [data-theme="light"] .value-text,
+        [data-theme="light"] .summary-value,
+        [data-theme="light"] .rec-name,
+        [data-theme="light"] .rec-status,
+        [data-theme="light"] .status-indicator,
+        [data-theme="light"] .meal-name,
+        [data-theme="light"] .sign,
+        [data-theme="light"] .login__register,
+        [data-theme="light"] .login__forgot,
+        [data-theme="light"] .report-analytics,
+        [data-theme="light"] .popularity-stat,
+        [data-theme="light"] .chart-label,
+        [data-theme="light"] .feedback-text,
+        [data-theme="light"] .complaint-detail,
+        [data-theme="light"] .feedback-content,
+        [data-theme="light"] .feedback-list-item h4 {
+            color: #000000 !important;
+        }
+
+        /* MENU REFINEMENTS - GLASS THEME */
+        [data-theme="light"] .meal-category {
+            color: #821005 !important;
+            font-weight: 600 !important;
+        }
+
+        [data-theme="light"] .vote-btn span {
+            color: #821005 !important;
+            font-weight: 600 !important;
+        }
+
+        [data-theme="light"] .vote-bar {
+            display: flex !important;
+        }
+
+        /* SPECIFIC PAGE TITLE COLOR REFINEMENT */
+        [data-theme="light"] .header__title {
+            color: #ffffff !important;
+            font-weight: 700 !important;
+        }
+
+        /* SIDEBAR WHITE GLASS THEME REFINEMENT */
+        [data-theme="light"] .sidebar {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(15px) !important;
+            border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+        }
+
+        [data-theme="light"] .sidebar__logo-text,
+        [data-theme="light"] .nav__link,
+        [data-theme="light"] .sidebar__footer .nav__link span,
+        [data-theme="light"] .nav__link span {
+            color: #000000 !important;
+            font-weight: 500 !important;
+        }
+
+        [data-theme="light"] .nav__link.active,
+        [data-theme="light"] .nav__link:hover {
+            background-color: #0858c7 !important;
+            color: #ffffff !important;
+        }
+
+        [data-theme="light"] .nav__icon,
+        [data-theme="light"] .card__icon,
+        [data-theme="light"] .clock,
+        [data-theme="light"] .sidebar__logo-text,
+        [data-theme="light"] .ri-checkbox-circle-line,
+        [data-theme="light"] i {
+            color: #ffd700 !important;
+        }
+
+        .clock {
+            font-weight: 600 !important;
+            letter-spacing: 1px !important;
+        }
+
+        /* Standardize Background Consistency for all pages */
+        .dashboard__img,
+        .login__img,
+        .register__img,
+        .auth__img {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            object-fit: cover !important;
+            object-position: center !important;
+            z-index: -1 !important;
+            pointer-events: none !important;
+        }
+
+        /* Common Button Styles Across Themes (Applying Designer Maroon/Gold) */
+        :root .btn-primary,
+        :root .btn-action,
+        :root .btn-add,
+        :root .btn-start,
+        :root .login__button {
+            background-color: #610a0a !important;
+            border: 2px solid #ffd700 !important;
+            color: #ffd700 !important;
+        }
+
+        /* WHITE TEXT FOR SPECIFIC ACTION BUTTONS (Visibility on Glass/Premium) */
+        [data-theme="light"] .btn-back,
+        [data-theme="light"] .btn-cancel,
+        [data-theme="light"] .btn-secondary,
+        [data-theme="light"] .btn-stay-logged-in,
+        [data-theme="light"] .btn-go-back,
+        [data-theme="light"] .btn-discharge,
+        [data-theme="light"] .btn-danger,
+        [data-theme="light"] .btn-close,
+        [data-theme="light"] .btn-discard,
+        [data-theme="light"] .modal-overlay a,
+        [data-theme="light"] .modal-overlay button,
+        [data-theme="light"] .btn-logout {
+            color: #ffffff !important;
+        }
+
+        /* HEADER GLASS EFFECT REFINEMENT (Matching Reference Photo) */
+        [data-theme="light"] .header {
+            background-color: rgba(0, 0, 0, 0.2) !important;
+            backdrop-filter: blur(15px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+            border-radius: 1.25rem !important;
+        }
+
+        [data-theme="light"] .header__subtitle {
+            color: #222222 !important;
+            font-weight: 500 !important;
+            opacity: 0.9 !important;
+        }
+
+        [data-theme="light"] .user-avatar {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border: 2px solid rgba(0, 0, 0, 0.1) !important;
+        }
+
+        /* MODAL GLASS THEME REFINEMENT */
+        [data-theme="light"] .modal-content {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(20px) !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2) !important;
+            color: #000000 !important;
+        }
+
+        [data-theme="light"] .modal-content *,
+        [data-theme="light"] .modal-body strong,
+        [data-theme="light"] .status-select {
+            color: #000000 !important;
+        }
+
+        [data-theme="light"] .modal-close {
+            color: #000000 !important;
+        }
+
+        [data-theme="light"] .status-select {
+            background: rgba(0, 0, 0, 0.05) !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        }
+
+
+        /* End Overrides */
+    </style>
+</head>
+
+<body>
+    <div class="login">
+        <img src="login-bg.png" alt="login image" class="login__img">
+
+        <form onsubmit="handleRegister(event)" class="login__form">
+            <h1 class="login__title">Create Account</h1>
+
+            <div class="login__content">
+                <div class="login__box">
+                    <i class="ri-user-3-line login__icon"></i>
+                    <div class="login__box-input">
+                        <input type="text" required class="login__input" id="username" placeholder=" ">
+                        <label for="username" class="login__label">Username</label>
+                    </div>
+                </div>
+
+                <div class="login__box">
+                    <i class="ri-mail-line login__icon"></i>
+                    <div class="login__box-input">
+                        <input type="email" required class="login__input" id="email" placeholder=" ">
+                        <label for="email" class="login__label">Email</label>
+                    </div>
+                </div>
+
+                <div class="login__box">
+                    <i class="ri-lock-2-line login__icon"></i>
+                    <div class="login__box-input">
+                        <input type="password" required class="login__input" id="password" placeholder=" ">
+                        <label for="password" class="login__label">Password</label>
+                        <i class="ri-eye-off-line login__eye" id="password-eye"></i>
+                    </div>
+                </div>
+
+                <div class="login__box">
+                    <i class="ri-lock-2-line login__icon"></i>
+                    <div class="login__box-input">
+                        <input type="password" required class="login__input" id="confirm-password" placeholder=" ">
+                        <label for="confirm-password" class="login__label">Confirm Password</label>
+                        <i class="ri-eye-off-line login__eye" id="confirm-password-eye"></i>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="login__button">Register</button>
+
+            <p class="login__register">
+                Already have an account? <a href="login.html">Login</a>
+            </p>
+            <p class="sign">
+                Designed by: KATO JOSEPH BWANIKA <br> REG:2023-B291-11709.
+            </p>
+        </form>
+    </div>
+
+    <script>
+        const showHiddenPass = (passId, eyeId) => {
+            const input = document.getElementById(passId), iconEye = document.getElementById(eyeId);
+            iconEye.addEventListener('click', () => {
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    iconEye.classList.add('ri-eye-line');
+                    iconEye.classList.remove('ri-eye-off-line');
+                } else {
+                    input.type = 'password';
+                    iconEye.classList.remove('ri-eye-line');
+                    iconEye.classList.add('ri-eye-off-line');
+                }
+            });
+        }
+        showHiddenPass('password', 'password-eye');
+        showHiddenPass('confirm-password', 'confirm-password-eye');
+
+        async function handleRegister(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const btn = document.querySelector('.login__button');
+
+            if (password !== confirmPassword) { alert("Passwords do not match!"); return; }
+            btn.innerHTML = 'Registering...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    alert("Registration successful! Please login.");
+                    window.location.href = 'login.html';
+                } else {
+                    alert(data.message || "Registration failed.");
+                    btn.innerHTML = 'Register';
+                    btn.disabled = false;
+                }
+            } catch (error) {
+                alert("An error occurred.");
+                btn.innerHTML = 'Register';
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+
+</html>
