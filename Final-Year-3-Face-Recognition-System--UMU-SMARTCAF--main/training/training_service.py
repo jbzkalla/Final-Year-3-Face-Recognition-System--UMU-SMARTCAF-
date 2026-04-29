@@ -34,10 +34,14 @@ def start_training_thread():
 def _run_training():
     global TRAINING_STATE
     try:
-        TRAINING_STATE['progress'] = 30
-        TRAINING_STATE['message'] = 'Processing images...'
+        TRAINING_STATE['progress'] = 10
+        TRAINING_STATE['message'] = 'Initializing...'
         
-        success, msg = train_model()
+        def progress_cb(percent, msg):
+            TRAINING_STATE['progress'] = percent
+            TRAINING_STATE['message'] = msg
+            
+        success, msg = train_model(progress_callback=progress_cb)
         
         if success:
             TRAINING_STATE['progress'] = 100

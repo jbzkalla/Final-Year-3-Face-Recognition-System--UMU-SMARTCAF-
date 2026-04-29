@@ -1629,11 +1629,23 @@
 
     <script>
         let stream = null;
-        let capturing = false;
+        let isCapturingBurst = false;
         let captureInterval = null;
-        let count = 0;
-        const MAX_IMAGES = 15; // Increased for better variety (angles, cap, etc.)
+        let burstCount = 0;
+        let totalCount = 0;
+        const IMAGES_PER_POSE = 12; // 12 frames per pose * 7 = 84 total frames
         const userId = new URLSearchParams(window.location.search).get('user_id');
+
+        const poses = [
+            { title: "Look Straight", msg: "Look straight at the camera" },
+            { title: "Turn Left", msg: "Turn your head slightly Left" },
+            { title: "Turn Right", msg: "Turn your head slightly Right" },
+            { title: "Look Up", msg: "Look slightly Upwards" },
+            { title: "Look Down", msg: "Look slightly Downwards" },
+            { title: "Neutral Face", msg: "Keep a Neutral face" },
+            { title: "Slight Smile", msg: "Give a slight Smile" }
+        ];
+        let poseIndex = 0;
 
         // Elements
         const videoElement = document.createElement('video');
@@ -1671,8 +1683,7 @@
                 overlay.className = 'camera-overlay';
                 feedContainer.appendChild(overlay);
 
-                statusEl.textContent = "Camera Ready. Press 'Start Capture'";
-                statusEl.style.color = "#8aff8a";
+                updateUIForPose();
             } catch (err) {
                 console.error("Camera error:", err);
                 statusEl.textContent = "Error accessing camera: " + err.message;
@@ -1680,39 +1691,56 @@
             }
         }
 
+        function updateUIForPose() {
+            if (poseIndex < poses.length) {
+                statusEl.textContent = poses[poseIndex].msg + ". Press 'Capture' when ready.";
+                statusEl.style.color = "#ffd700";
+                counterEl.textContent = `Pose ${poseIndex + 1} / ${poses.length}`;
+                btnStart.innerHTML = `<i class="ri-camera-lens-line"></i> Capture: ${poses[poseIndex].title}`;
+            } else {
+                statusEl.textContent = "All essential poses captured! You can Finish now.";
+                statusEl.style.color = "#8aff8a";
+                counterEl.textContent = `Complete`;
+                btnStart.disabled = true;
+                btnStart.innerHTML = `<i class="ri-camera-lens-line"></i> Completed`;
+                btnStop.disabled = true;
+                btnFinish.disabled = false;
+            }
+        }
+
         async function startCapture() {
             if (!stream) await initCamera();
             if (!stream) return;
+            if (poseIndex >= poses.length || isCapturingBurst) return;
 
-            capturing = true;
+            isCapturingBurst = true;
             btnStart.disabled = true;
             btnStop.disabled = false;
-            statusEl.textContent = "Capturing images... Please move your head slightly.";
+            statusEl.textContent = "Hold still, capturing " + poses[poseIndex].title + ` (${burstCount}/${IMAGES_PER_POSE})...`;
+            statusEl.style.color = "#00ffff";
 
-            captureInterval = setInterval(captureFrame, 500); // 2 photos per second for faster variety
+            captureInterval = setInterval(captureFrame, 150); // fast burst
         }
 
         function stopCapture() {
-            capturing = false;
-            clearInterval(captureInterval);
-            btnStart.disabled = false;
-            btnStop.disabled = true;
-            statusEl.textContent = "Capture Paused";
-
-            if (count >= 5) {
-                btnFinish.disabled = false;
-                statusEl.textContent = "Sufficient images captured. You can Finish now.";
+            stopBurst();
+            if (poseIndex < poses.length) {
+                statusEl.textContent = "Capture Paused. Press Capture to resume this pose.";
+                statusEl.style.color = "#ffd700";
             }
+        }
+        
+        function stopBurst() {
+            isCapturingBurst = false;
+            clearInterval(captureInterval);
+            if (poseIndex < poses.length) {
+                btnStart.disabled = false;
+            }
+            btnStop.disabled = true;
         }
 
         async function captureFrame() {
-            if (!capturing || count >= MAX_IMAGES) {
-                stopCapture();
-                if (count >= MAX_IMAGES) {
-                    statusEl.textContent = "Maximum images captured!";
-                }
-                return;
-            }
+            if (!isCapturingBurst) return;
 
             const context = canvas.getContext('2d');
             canvas.width = videoElement.videoWidth;
@@ -1734,23 +1762,34 @@
 
                 const result = await response.json();
                 if (result.success) {
-                    count++;
-                    counterEl.textContent = `${count} / ${MAX_IMAGES}`;
+                    burstCount++;
+                    totalCount++;
+                    
+                    statusEl.textContent = "Hold still, capturing " + poses[poseIndex].title + ` (${burstCount}/${IMAGES_PER_POSE})...`;
+                    
+                    if (burstCount >= IMAGES_PER_POSE) {
+                        stopBurst();
+                        poseIndex++;
+                        burstCount = 0; // reset for next pose
+                        updateUIForPose();
+                    }
                 } else {
                     console.error("Upload failed", result);
                 }
             } catch (e) {
                 console.error("Network error", e);
+                stopBurst(); // pause on error to avoid spamming
+                statusEl.textContent = "Network error. Server might be down.";
             }
         }
 
         function finishCapture() {
-            if (confirm('Are you sure you want to finish face capture?')) {
+            if (confirm('Are you sure you want to finish face capture? The system will now process your images.')) {
                 // Stop tracks
                 if (stream) {
                     stream.getTracks().forEach(track => track.stop());
                 }
-                alert('Face data saved successfully!');
+                alert('Images captured successfully! Please go to "Restricted Access" -> "Train System" to complete registration.');
                 window.location.href = 'users-list.html';
             }
         }
@@ -1761,20 +1800,6 @@
     </script>
 
     <script>
-        );
-            const clockElement = document.getElementById('realtime-clock');
-            if (clockElement) {
-                clockElement.textContent = timeString;
-            }
-        }
-
-        
-         // Initial call
-    
-        
-
-        
-
         async function applyRoleBasedUI() {
             try {
                 const r = await fetch('/api/session');
@@ -1785,9 +1810,9 @@
                     const sidebar = document.querySelector('.sidebar');
                     if (role === 'student') {
                         if (sidebar) sidebar.classList.add('sidebar--compact');
-                        ['nav-users', 'nav-attendance', 'nav-finance', 'nav-menu-mgmt', 'nav-reports', 'nav-settings', 'nav-feedback-list'].forEach(id => {
+                        ['nav-users', 'nav-attendance', 'nav-finance', 'nav-menu-mgmt', 'nav-reports', 'nav-settings', 'nav-feedback-list', 'nav-training'].forEach(id => {
                             const el = document.getElementById(id);
-                            if (el) el.style.display = 'none';
+                            if (el) el.remove();
                         });
                     } else {
                         if (sidebar) sidebar.classList.add('sidebar--compact');
@@ -1797,8 +1822,11 @@
                         if (navFeedbackList) navFeedbackList.style.display = 'block';
                         if (navFeedback) navFeedback.style.display = 'none';
                         if (role === 'staff') {
-                            const settingsLink = document.getElementById('nav-settings');
-                            if (settingsLink) settingsLink.style.display = 'none';
+                            // Hide sensitive administration links from Staff
+                            ['nav-users', 'nav-finance', 'nav-reports', 'nav-training'].forEach(id => {
+                                const el = document.getElementById(id);
+                                if (el) el.style.display = 'none';
+                            });
                         }
                     }
                 }

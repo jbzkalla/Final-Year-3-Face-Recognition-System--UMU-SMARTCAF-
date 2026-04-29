@@ -430,14 +430,5 @@
         "department": "BUS",
         "password_hash": "6e26487bf8f0b1e10e6503701401942ef5c81a64795c7b41627c5a734a9306a7295b621e87ca8cb077a3aef5d61882301923dda3969523133094a92e07b768c0",
         "created_at": "2025-12-21 10:51:30"
-    },
-    {
-        "id": "UMUSTAF20250008",
-        "name": "Willian Mark lule",
-        "email": "willian.mark@staff.umu.ac.ug",
-        "role": "staff",
-        "department": "",
-        "password_hash": "7094679cadf0107edad87b973863789277b1f2d6b669fe268c81169cd993a12d58bf801b181414550ec1ae06e12ca186e2c9d79c1f88f8cdb7bdaa0f147d9fec",
-        "created_at": "2025-12-21 16:56:18"
     }
 ]

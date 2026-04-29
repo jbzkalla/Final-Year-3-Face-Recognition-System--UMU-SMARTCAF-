@@ -58,5 +58,119 @@
         "user": "admin@umu.ac.ug",
         "action": "BULK_TOGGLE",
         "details": "Set 4 items in All to False"
+    },
+    {
+        "timestamp": "2026-04-29T05:57:34.615201",
+        "user": "admin@umu.ac.ug",
+        "action": "UPDATE_MEAL",
+        "details": "Updated Chips fries (ID: c2bab146-952d-4731-8576-41fc8911eb29)"
+    },
+    {
+        "timestamp": "2026-04-29T05:57:57.902430",
+        "user": "admin@umu.ac.ug",
+        "action": "UPDATE_MEAL",
+        "details": "Updated Fried Rice (ID: f2f0906c-b416-4259-8dd4-7a01bb3763cb)"
+    },
+    {
+        "timestamp": "2026-04-29T06:12:37.994682",
+        "user": "admin@umu.ac.ug",
+        "action": "UPDATE_MEAL",
+        "details": "Updated Cold Coca Cola soda (ID: 0044eab9-e404-4122-9cd2-307fb065dabd)"
+    },
+    {
+        "timestamp": "2026-04-29T06:13:10.954885",
+        "user": "admin@umu.ac.ug",
+        "action": "UPDATE_MEAL",
+        "details": "Updated mango juice (ID: e921eb23-75cb-407f-b4c1-8b3f4b738af6)"
+    },
+    {
+        "timestamp": "2026-04-29T06:16:10.504903",
+        "user": "admin@umu.ac.ug",
+        "action": "ADD_MEAL",
+        "details": "Added Matooke & Beef (ID: 5acb8193-a6a9-4f4c-afaf-114affd694ed)"
+    },
+    {
+        "timestamp": "2026-04-29T06:20:09.059954",
+        "user": "admin@umu.ac.ug",
+        "action": "ADD_MEAL",
+        "details": "Added Delicious Plantain Banana (ID: f262a0b0-1972-4d98-9726-7053ca628810)"
+    },
+    {
+        "timestamp": "2026-04-29T06:20:40.136144",
+        "user": "admin@umu.ac.ug",
+        "action": "UPDATE_MEAL",
+        "details": "Updated Delicious Plantain Banana (ID: f262a0b0-1972-4d98-9726-7053ca628810)"
+    },
+    {
+        "timestamp": "2026-04-29T06:25:54.974285",
+        "user": "admin@umu.ac.ug",
+        "action": "ADD_MEAL",
+        "details": "Added Fried Chicken & Rice (ID: 9a353ef2-ae44-42fc-9c63-dd3314847b07)"
+    },
+    {
+        "timestamp": "2026-04-29T06:30:19.666747",
+        "user": "admin@umu.ac.ug",
+        "action": "ADD_MEAL",
+        "details": "Added Lucozade Original Glass (ID: 1ba8e47a-3b45-4ffe-93f4-cda025371166)"
+    },
+    {
+        "timestamp": "2026-04-29T06:30:39.895463",
+        "user": "admin@umu.ac.ug",
+        "action": "UPDATE_MEAL",
+        "details": "Updated Lucozade Original Glass (ID: 1ba8e47a-3b45-4ffe-93f4-cda025371166)"
+    },
+    {
+        "timestamp": "2026-04-29T06:32:17.697301",
+        "user": "admin@umu.ac.ug",
+        "action": "UPDATE_MEAL",
+        "details": "Updated Lucozade Original Glass (ID: 1ba8e47a-3b45-4ffe-93f4-cda025371166)"
+    },
+    {
+        "timestamp": "2026-04-29T06:34:13.142020",
+        "user": "admin@umu.ac.ug",
+        "action": "ADD_MEAL",
+        "details": "Added Rwenzori Water (ID: 66f789c3-ff57-46a9-9034-579a99b42eaf)"
+    },
+    {
+        "timestamp": "2026-04-29T06:34:41.238746",
+        "user": "admin@umu.ac.ug",
+        "action": "UPDATE_MEAL",
+        "details": "Updated Rwenzori Water (ID: 66f789c3-ff57-46a9-9034-579a99b42eaf)"
+    },
+    {
+        "timestamp": "2026-04-29T06:35:05.355087",
+        "user": "admin@umu.ac.ug",
+        "action": "UPDATE_MEAL",
+        "details": "Updated Lucozade Original Glass (ID: 1ba8e47a-3b45-4ffe-93f4-cda025371166)"
+    },
+    {
+        "timestamp": "2026-04-29T06:36:02.876780",
+        "user": "admin@umu.ac.ug",
+        "action": "UPDATE_MEAL",
+        "details": "Updated Lucozade Original Drink (ID: 1ba8e47a-3b45-4ffe-93f4-cda025371166)"
+    },
+    {
+        "timestamp": "2026-04-29T06:36:30.966510",
+        "user": "admin@umu.ac.ug",
+        "action": "UPDATE_MEAL",
+        "details": "Updated Lucozade Original Drink (ID: 1ba8e47a-3b45-4ffe-93f4-cda025371166)"
+    },
+    {
+        "timestamp": "2026-04-29T06:37:34.136284",
+        "user": "admin@umu.ac.ug",
+        "action": "UPDATE_MEAL",
+        "details": "Updated Lucozade Original Drink (ID: 1ba8e47a-3b45-4ffe-93f4-cda025371166)"
+    },
+    {
+        "timestamp": "2026-04-29T06:40:46.167604",
+        "user": "admin@umu.ac.ug",
+        "action": "ADD_MEAL",
+        "details": "Added G.nut  and matooke delicious meal  (ID: f7e02a6f-6457-48c6-999b-70b675e5874c)"
+    },
+    {
+        "timestamp": "2026-04-29T06:41:31.132393",
+        "user": "admin@umu.ac.ug",
+        "action": "UPDATE_MEAL",
+        "details": "Updated G.nut  and matooke delicious meal  (ID: f7e02a6f-6457-48c6-999b-70b675e5874c)"
     }
 ]

@@ -62,13 +62,14 @@
         }
 
         .dashboard__img {
-            position: absolute;
-            /* Changed from fixed to absolute to match dashboard */
-            width: 100%;
-            height: 100%;
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
             object-fit: cover;
             object-position: center;
             z-index: -1;
+            top: 0;
+            left: 0;
         }
 
         /* Sidebar Standard */
@@ -157,7 +158,7 @@
             margin-bottom: 2rem;
         }
 
-        .btn-add {
+        .btn-add, .btn-primary {
             background-color: var(--white-color);
             color: var(--black-color);
             padding: 0.75rem 1.5rem;
@@ -168,10 +169,32 @@
             align-items: center;
             column-gap: 0.5rem;
             transition: 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
-        .btn-add:hover {
+        .btn-add:hover, .btn-primary:hover {
             opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            column-gap: 0.5rem;
+            transition: 0.3s;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.2);
             transform: scale(1.05);
         }
 
@@ -257,6 +280,14 @@
             background-size: 200% 100%;
             animation: skeleton-loading 1.5s infinite;
             border-radius: 0.5rem;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .rotate {
+            animation: rotate 1s linear infinite;
         }
 
         @keyframes skeleton-loading {
@@ -347,11 +378,35 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            width: 500px;
+            max-width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 2px solid #333;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
         }
 
         .modal-content {
@@ -1528,9 +1583,14 @@
             </header>
 
             <div class="table-container">
-                <div style="padding: 1.25rem 1.25rem 0.5rem; display: flex; justify-content: flex-end;">
+                <div style="padding: 1.25rem 1.25rem 0.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
+                    <button class="btn-secondary"
+                        style="border-radius: 2rem;"
+                        onclick="openBulkModal()">
+                        <i class="ri-file-upload-line"></i> Bulk Upload
+                    </button>
                     <button class="btn-primary"
-                        style="border-radius: 2rem; padding: 0.5rem 1.25rem; display: flex; align-items: center; gap: 0.5rem;"
+                        style="border-radius: 2rem;"
                         onclick="openModal()">
                         <i class="ri-add-line"></i> Add New Meal
                     </button>
@@ -1619,11 +1679,32 @@
         </div>
     </div>
 
+    <!-- Bulk Upload Modal -->
+    <div id="bulkModal" class="modal">
+        <div class="modal-content" style="width: 400px;">
+            <h2 style="margin-bottom: 1rem;">Bulk Menu Upload</h2>
+            <p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 1.5rem;">
+                Upload a CSV or Excel file with columns: <br>
+                <code>Name, Category, Time Served, Price, Description</code>
+            </p>
+            <form id="bulkForm" onsubmit="handleBulkUpload(event)">
+                <div class="form-group">
+                    <label class="form-label">Select File</label>
+                    <input type="file" id="bulkFile" class="form-input" accept=".csv, .xls, .xlsx" required>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeBulkModal()">Cancel</button>
+                    <button type="submit" class="btn-save" id="btn-bulk-save">Start Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         let menuItems = [];
 
-        async function fetchMenu() {
-            renderSkeletons();
+        async function fetchMenu(showSkeletons = true) {
+            if (showSkeletons) renderSkeletons();
             try {
                 const response = await fetch('/api/menu/all');
                 const data = await response.json();
@@ -1662,6 +1743,9 @@
                 body.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 3rem; opacity: 0.5;">No items found.</td></tr>';
                 return;
             }
+
+            const isStaff = window.userRole === 'staff';
+
             body.innerHTML = items.map(item => `
                 <tr>
                     <td class="checkbox-cell"><input type="checkbox" class="item-checkbox row-checkbox" data-id="${item.id}"></td>
@@ -1680,7 +1764,7 @@
                     <td class="actions">
                         <button class="action-btn" onclick="toggleStatus('${item.id}')" title="Toggle Status"><i class="${item.is_available ? 'ri-toggle-line' : 'ri-toggle-fill'}"></i></button>
                         <button class="action-btn" onclick="openModal('${item.id}')" title="Edit"><i class="ri-edit-line"></i></button>
-                        <button class="action-btn btn-delete" onclick="deleteItems('${item.id}')" title="Delete"><i class="ri-delete-bin-line"></i></button>
+                        ${isStaff ? '' : `<button class="action-btn btn-delete" onclick="deleteItems('${item.id}')" title="Delete"><i class="ri-delete-bin-line"></i></button>`}
                     </td>
                 </tr>
             `).join('');
@@ -1732,7 +1816,7 @@
                 const result = await response.json();
                 if (result.success) {
                     alert('Items deleted successfully.');
-                    fetchMenu();
+                    fetchMenu(false); // Silent update
                 } else {
                     alert('Error: ' + result.message);
                 }
@@ -1769,11 +1853,21 @@
             } else {
                 title.textContent = 'Add New Meal';
             }
-            modal.style.display = 'flex';
+            modal.classList.add('show');
         }
 
         function closeModal() {
-            document.getElementById('mealModal').style.display = 'none';
+            const modal = document.getElementById('mealModal');
+            modal.classList.remove('show');
+        }
+
+        function openBulkModal() {
+            document.getElementById('bulkForm').reset();
+            document.getElementById('bulkModal').classList.add('show');
+        }
+
+        function closeBulkModal() {
+            document.getElementById('bulkModal').classList.remove('show');
         }
 
         function previewImage(event) {
@@ -1792,6 +1886,13 @@
         async function handleSave(event) {
             event.preventDefault();
             const id = document.getElementById('mealId').value;
+            const btnSave = event.submitter;
+            const originalContent = btnSave.innerHTML;
+
+            // Loading state
+            btnSave.disabled = true;
+            btnSave.innerHTML = '<i class="ri-loader-4-line rotate"></i> Saving...';
+
             const formData = new FormData();
             formData.append('name', document.getElementById('mealName').value);
             formData.append('category', document.getElementById('mealCategory').value);
@@ -1812,18 +1913,60 @@
                 const result = await response.json();
                 if (result.success) {
                     closeModal();
-                    fetchMenu();
+                    fetchMenu(false); // Silent update
                 } else {
                     alert(result.message);
                 }
-            } catch (e) { console.error(e); }
+            } catch (e) {
+                console.error(e);
+                alert('Connection error. Please try again.');
+            } finally {
+                btnSave.disabled = false;
+                btnSave.innerHTML = originalContent;
+            }
+        }
+
+        async function handleBulkUpload(event) {
+            event.preventDefault();
+            const file = document.getElementById('bulkFile').files[0];
+            if (!file) return;
+
+            const btnSave = document.getElementById('btn-bulk-save');
+            const originalContent = btnSave.innerHTML;
+
+            btnSave.disabled = true;
+            btnSave.innerHTML = '<i class="ri-loader-4-line rotate"></i> Processing...';
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch('/api/admin/menu/bulk-upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                if (result.success) {
+                    alert(result.message);
+                    closeBulkModal();
+                    fetchMenu(false);
+                } else {
+                    alert(result.message);
+                }
+            } catch (e) {
+                console.error(e);
+                alert('Upload failed. Check your file format.');
+            } finally {
+                btnSave.disabled = false;
+                btnSave.innerHTML = originalContent;
+            }
         }
 
         async function toggleStatus(id) {
             try {
                 const response = await fetch(`/api/admin/menu/${id}/toggle`, { method: 'POST' });
                 const result = await response.json();
-                if (result.success) fetchMenu();
+                if (result.success) fetchMenu(false); // Silent update
             } catch (e) { console.error(e); }
         }
 
@@ -1832,7 +1975,7 @@
             try {
                 const response = await fetch(`/api/admin/menu/${id}`, { method: 'DELETE' });
                 const result = await response.json();
-                if (result.success) fetchMenu();
+                if (result.success) fetchMenu(false); // Silent update
             } catch (e) { console.error(e); }
         }
 
@@ -1853,9 +1996,9 @@
                     const sidebar = document.querySelector('.sidebar');
                     if (role === 'student') {
                         if (sidebar) sidebar.classList.add('sidebar--compact');
-                        ['nav-users', 'nav-attendance', 'nav-finance', 'nav-menu-mgmt', 'nav-reports', 'nav-settings', 'nav-feedback-list'].forEach(id => {
+                        ['nav-users', 'nav-attendance', 'nav-finance', 'nav-menu-mgmt', 'nav-reports', 'nav-settings', 'nav-feedback-list', 'nav-training'].forEach(id => {
                             const el = document.getElementById(id);
-                            if (el) el.style.display = 'none';
+                            if (el) el.remove();
                         });
                     } else {
                         if (sidebar) sidebar.classList.add('sidebar--compact');
@@ -1865,10 +2008,23 @@
                         if (navFeedbackList) navFeedbackList.style.display = 'block';
                         if (navFeedback) navFeedback.style.display = 'none';
                         if (role === 'staff') {
-                            const settingsLink = document.getElementById('nav-settings');
-                            if (settingsLink) settingsLink.style.display = 'none';
+                            // Hide sensitive administration links from Staff
+                            ['nav-users', 'nav-finance', 'nav-reports', 'nav-training'].forEach(id => {
+                                const el = document.getElementById(id);
+                                if (el) el.style.display = 'none';
+                            });
+
+                            // Hide Bulk Delete for Staff
+                            const bulkDeleteBtn = document.querySelector('.btn-bulk-delete');
+                            if (bulkDeleteBtn) bulkDeleteBtn.style.display = 'none';
                         }
                     }
+                    
+                    // Expose role to window for table rendering
+                    window.userRole = role;
+                    
+                    // Re-render table if it was already loaded
+                    if (menuItems.length > 0) renderTable(menuItems);
                 }
             } catch (e) { }
         }

@@ -41,12 +41,23 @@ def recognize_endpoint():
         return jsonify({"success": False, "message": "Image required"}), 400
 
     # 1. Recognize Face
-    user_id, confidence = recognize_face(image_data)
+    rec_result = recognize_face(image_data)
+    user_id = rec_result.get('user_id')
+    confidence = rec_result.get('confidence', 0)
+    facial_area = rec_result.get('facial_area')
+    is_live = rec_result.get('is_live', True)
     
     if user_id:
         if save:
             # 2. Mark Attendance immediately
             result = mark_attendance(user_id, confidence)
+            user = get_user_by_id(user_id)
+            
+            # Add vision and identity feedback data
+            result['recognised'] = True
+            result['facial_area'] = facial_area
+            result['is_live'] = is_live
+            result['role'] = user['role'] if user else "Unknown"
             
             # 3. Handle Single User Mode Termination
             session = get_active_session()
@@ -63,10 +74,19 @@ def recognize_endpoint():
                 "recognised": True,
                 "user_id": user_id,
                 "name": user['name'] if user else "Unknown User",
-                "confidence": confidence
+                "role": user['role'] if user else "Unknown",
+                "confidence": confidence,
+                "facial_area": facial_area,
+                "is_live": is_live
             })
     else:
-        return jsonify({"success": False, "message": "Face not recognized", "confidence": confidence}), 401
+        return jsonify({
+            "success": False, 
+            "message": "Face not recognized", 
+            "confidence": confidence,
+            "facial_area": facial_area,
+            "is_live": is_live
+        }), 401
 
 @attendance_bp.route('/api/attendance/save', methods=['POST'])
 def save_attendance_endpoint():

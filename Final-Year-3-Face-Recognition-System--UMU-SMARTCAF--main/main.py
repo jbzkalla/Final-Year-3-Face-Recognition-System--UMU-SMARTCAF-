@@ -10,6 +10,7 @@ from admin.settings_controller import admin_bp
 from security.security_controller import security_bp
 from support.support_controller import support_bp
 from menu.menu_controller import menu_bp
+from attendance.recognition_service import load_embeddings_to_cache
 
 import os
 
@@ -132,5 +133,7 @@ def serve_static(path):
 
 if __name__ == '__main__':
     print("Starting UMU SmartCaf Server...")
+    print("Initializing Identity Cache...")
+    load_embeddings_to_cache()
     print("Access the app at http://localhost:5000")
     app.run(debug=True, port=5000)

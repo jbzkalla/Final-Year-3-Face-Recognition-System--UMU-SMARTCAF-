@@ -313,18 +313,32 @@
         }
 
         .camera-container {
-            flex: 2;
+            width: 100%;
+            max-width: 560px;
+            height: 420px;
             background-color: #000;
             border-radius: 1rem;
             position: relative;
             overflow: hidden;
             border: var(--glass-border);
+            margin: 0 auto;
+            align-self: center;
         }
 
         .camera-feed {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        #overlay-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
         }
 
         .recognition-overlay {
@@ -1637,6 +1651,133 @@
             font-weight: 700 !important;
         }
 
+        /* =========================================
+           REAL-TIME ATTENDANCE ANIMATIONS
+           ========================================= */
+
+        /* New row slide-in + glow */
+        @keyframes rowSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-30px);
+                background-color: rgba(255, 215, 0, 0.25);
+            }
+            40% {
+                opacity: 1;
+                transform: translateX(0);
+                background-color: rgba(255, 215, 0, 0.15);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+                background-color: transparent;
+            }
+        }
+
+        tr.row-new {
+            animation: rowSlideIn 1.2s ease-out forwards;
+        }
+
+        /* Stat counter pop animation */
+        @keyframes statPop {
+            0%   { transform: scale(1); }
+            40%  { transform: scale(1.35); }
+            70%  { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+
+        .stat-pop {
+            animation: statPop 0.45s ease-out;
+        }
+
+        /* Toast notification system */
+        .toast-container {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            pointer-events: none;
+        }
+
+        @keyframes toastIn {
+            0%   { opacity: 0; transform: translateX(100px) scale(0.85); }
+            100% { opacity: 1; transform: translateX(0) scale(1); }
+        }
+
+        @keyframes toastOut {
+            0%   { opacity: 1; transform: translateX(0) scale(1); }
+            100% { opacity: 0; transform: translateX(100px) scale(0.85); }
+        }
+
+        .toast {
+            pointer-events: auto;
+            min-width: 300px;
+            max-width: 400px;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            animation: toastIn 0.4s ease-out forwards;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .toast.toast-exit {
+            animation: toastOut 0.35s ease-in forwards;
+        }
+
+        .toast-granted {
+            background: linear-gradient(135deg, rgba(40,167,69,0.92), rgba(32,130,55,0.92));
+            color: #fff;
+        }
+
+        .toast-denied {
+            background: linear-gradient(135deg, rgba(220,53,69,0.92), rgba(180,40,55,0.92));
+            color: #fff;
+        }
+
+        .toast-unknown {
+            background: linear-gradient(135deg, rgba(255,193,7,0.92), rgba(220,165,0,0.92));
+            color: #1a1a1a;
+        }
+
+        .toast-icon {
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .toast-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .toast-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .toast-subtitle {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        /* Live update pulse on the "Recent Scans" header */
+        @keyframes headerPulse {
+            0%   { text-shadow: 0 0 0 transparent; }
+            50%  { text-shadow: 0 0 12px rgba(255,215,0,0.5); }
+            100% { text-shadow: 0 0 0 transparent; }
+        }
+
+        .table-title.pulsing {
+            animation: headerPulse 0.8s ease-out;
+        }
+
         /* End Overrides */
     </style>
 </head>
@@ -1730,8 +1871,11 @@
             <!-- Header -->
 
             <header class="header">
-                <div>
+                <div style="display: flex; align-items: center; gap: 1.5rem;">
                     <h1 class="header__title">Live Attendance</h1>
+                    <button id="btn-stop-session-header" class="btn-stop-sm" style="background-color: #dc3545; border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);">
+                        <i class="ri-stop-circle-line"></i> Stop Session
+                    </button>
                 </div>
                 <div class="header__right">
                     <div class="clock" id="realtime-clock">00:00:00</div>
@@ -1789,8 +1933,10 @@
                 <!-- Right Column -->
                 <div class="right-col">
                     <div class="table-header">
-                        <h2 class="table-title">Recent Scans</h2>
-                        <i class="ri-history-line"></i>
+                        <h2 class="table-title" id="table-title">Recent Scans</h2>
+                        <span id="live-update-indicator" style="display:flex;align-items:center;gap:0.4rem;font-size:0.8rem;opacity:0.7;">
+                            <span class="live-indicator"></span> LIVE
+                        </span>
                     </div>
                     <div class="live-table-container">
                         <table>
@@ -1819,6 +1965,9 @@
     </main>
     </div>
 
+    <!-- Toast notification container -->
+    <div class="toast-container" id="toast-container"></div>
+
     <script>
         const videoContainer = document.querySelector('.camera-container');
         const recognitionOverlay = document.getElementById('recognition-overlay');
@@ -1828,6 +1977,8 @@
         const btnConfirm = document.getElementById('btn-confirm');
         const btnSaveFinal = document.getElementById('btn-save-final');
         const tableBody = document.querySelector('tbody');
+        const toastContainer = document.getElementById('toast-container');
+        const tableTitle = document.getElementById('table-title');
 
         let currentSession = null;
         let currentUser = null;
@@ -1840,6 +1991,144 @@
         let videoStream = null;
         let recognitionInterval = null;
         let statsInterval = null;
+
+        // =========================================
+        //  IDENTITY LOCK-IN STATE
+        //  After a successful match, freeze the
+        //  overlay for LOCK_DURATION ms so the
+        //  name never keeps flickering/changing.
+        // =========================================
+        const LOCK_DURATION = 5000; // ms to pause after a confirmed scan
+        let lockedUntil = 0;        // timestamp – scanning paused while Date.now() < lockedUntil
+        let lastRecognized = null;  // { name, status, confidence, facial_area }
+
+        // =========================================
+        //  REAL-TIME UI HELPERS
+        // =========================================
+
+        /** Animate a stat counter element when its value changes */
+        function animateStat(el, newValue) {
+            const old = el.textContent;
+            if (String(newValue) !== String(old)) {
+                el.textContent = newValue;
+                el.classList.remove('stat-pop');
+                void el.offsetWidth; // trigger reflow
+                el.classList.add('stat-pop');
+            }
+        }
+
+        /** Convert HH:MM:SS (24h) → h:MM AM/PM (12h) */
+        function to12h(timeStr) {
+            if (!timeStr) return timeStr;
+            try {
+                const [hStr, mStr] = timeStr.split(':');
+                let h = parseInt(hStr, 10);
+                const m = mStr || '00';
+                const ampm = h >= 12 ? 'PM' : 'AM';
+                h = h % 12 || 12; // 0 → 12
+                return `${h}:${m} ${ampm}`;
+            } catch(e) { return timeStr; }
+        }
+
+        /** Build a single table-row element from a log entry */
+        function buildRow(log) {
+            const row = document.createElement('tr');
+            const statusColor = log.status === 'Granted' ? '#28a745' : '#dc3545';
+            const statusBg   = log.status === 'Granted' ? 'rgba(40, 167, 69, 0.2)' : 'rgba(220, 53, 69, 0.2)';
+            const displayTime = to12h(log.time);
+            row.setAttribute('data-key', `${log.time}-${log.name}`);
+            row.innerHTML = `
+                <td>${displayTime}</td>
+                <td style="font-weight: 700; color: #ffffff; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">${log.name}</td>
+                <td>
+                    <span style="color: ${statusColor}; background: ${statusBg}; padding: 0.25rem 0.75rem; border-radius: 1rem; font-weight: 600; font-size: 0.75rem; border: 1px solid ${statusColor}">
+                        ${log.status}
+                    </span>
+                </td>
+                <td>${log.confidence}%</td>
+            `;
+            return row;
+        }
+
+        /** Instantly insert a new row at the top of the table with animation */
+        function insertRowInstant(log) {
+            const key = `${log.time}-${log.name}`;
+            // Avoid duplicates
+            if (tableBody.querySelector(`tr[data-key="${key}"]`)) return;
+
+            const row = buildRow(log);
+            row.classList.add('row-new');
+
+            // Insert at top
+            if (tableBody.firstChild) {
+                tableBody.insertBefore(row, tableBody.firstChild);
+            } else {
+                tableBody.appendChild(row);
+            }
+
+            // Cap visible rows at 15
+            while (tableBody.children.length > 15) {
+                tableBody.removeChild(tableBody.lastChild);
+            }
+
+            // Pulse the header
+            tableTitle.classList.remove('pulsing');
+            void tableTitle.offsetWidth;
+            tableTitle.classList.add('pulsing');
+
+            // Scroll table container to top
+            const container = document.querySelector('.live-table-container');
+            if (container) container.scrollTop = 0;
+        }
+
+        /** Show a toast notification */
+        function showToast(name, status, confidence) {
+            const toast = document.createElement('div');
+            let cls, icon, title, subtitle;
+
+            if (status === 'Granted') {
+                cls = 'toast-granted';
+                icon = 'ri-checkbox-circle-fill';
+                title = `✅ ${name}`;
+                subtitle = `Access Granted — ${confidence}% match`;
+            } else if (status === 'Denied') {
+                cls = 'toast-denied';
+                icon = 'ri-close-circle-fill';
+                title = `❌ ${name}`;
+                subtitle = `Access Denied — ${confidence}% match`;
+            } else {
+                cls = 'toast-unknown';
+                icon = 'ri-error-warning-fill';
+                title = 'Unrecognized Face';
+                subtitle = 'Adjust position & try again';
+            }
+
+            toast.className = `toast ${cls}`;
+            toast.innerHTML = `
+                <i class="${icon} toast-icon"></i>
+                <div class="toast-body">
+                    <span class="toast-title">${title}</span>
+                    <span class="toast-subtitle">${subtitle}</span>
+                </div>
+            `;
+
+            toastContainer.appendChild(toast);
+
+            // Auto-dismiss after 3.5s
+            setTimeout(() => {
+                toast.classList.add('toast-exit');
+                toast.addEventListener('animationend', () => toast.remove());
+            }, 3500);
+
+            // Limit on-screen toasts
+            while (toastContainer.children.length > 4) {
+                toastContainer.firstChild.remove();
+            }
+        }
+
+        // =========================================
+        //  CAMERA & RECOGNITION
+        // =========================================
 
         async function startCamera() {
             let video = document.getElementById('camera-feed');
@@ -1862,19 +2151,78 @@
                     video: { facingMode: 'user' }
                 });
                 video.srcObject = videoStream;
-                startRecognition(video);
+                
+                // Add Overlay Canvas
+                let canvasOverlay = document.getElementById('overlay-canvas');
+                if (!canvasOverlay) {
+                    canvasOverlay = document.createElement('canvas');
+                    canvasOverlay.id = 'overlay-canvas';
+                    videoContainer.appendChild(canvasOverlay);
+                }
+
+                startRecognition(video, canvasOverlay);
             } catch (error) {
                 console.error('Camera error:', error);
                 alert('Could not access camera');
             }
         }
 
-        function startRecognition(video) {
+        function startRecognition(video, overlayCanvas) {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
+            const octx = overlayCanvas.getContext('2d');
+
+            // --- AUDIO FEEDBACK SYSTEM ---
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            function playSound(type) {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'success') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(880, audioCtx.currentTime); // A5
+                    osc.frequency.exponentialRampToValueAtTime(1320, audioCtx.currentTime + 0.1); // E6
+                    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.3);
+                } else {
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(220, audioCtx.currentTime); // A3
+                    osc.frequency.linearRampToValueAtTime(110, audioCtx.currentTime + 0.2); // A2
+                    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                    gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.3);
+                }
+            }
 
             recognitionInterval = setInterval(async () => {
                 if (!recActive) return;
+
+                // ── IDENTITY LOCK-IN: if we just confirmed someone, pause recognition
+                //    and keep showing their locked name in the overlay for LOCK_DURATION ms
+                if (Date.now() < lockedUntil) {
+                    // Re-draw the locked face box so it stays visible
+                    if (lastRecognized && lastRecognized.facial_area) {
+                        overlayCanvas.width = video.videoWidth;
+                        overlayCanvas.height = video.videoHeight;
+                        octx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+                        const { x, y, w, h } = lastRecognized.facial_area;
+                        const lockColor = lastRecognized.status === 'Granted' ? '#28a745' : '#dc3545';
+                        // Pulsing border via opacity flicker
+                        octx.strokeStyle = lockColor;
+                        octx.lineWidth = 4;
+                        octx.strokeRect(x, y, w, h);
+                        // Show confirmed name + lock icon
+                        octx.fillStyle = lockColor;
+                        octx.font = 'bold 18px Poppins, sans-serif';
+                        octx.fillText(`✓ ${lastRecognized.name}`, x, y - 12);
+                    }
+                    return; // skip API call until lock expires
+                }
 
                 if (video.readyState === video.HAVE_ENOUGH_DATA) {
                     canvas.width = video.videoWidth;
@@ -1895,20 +2243,94 @@
                         });
 
                         const result = await response.json();
-                        updateOverlay(result, isSingleMode);
-                        fetchStats();
+
+                        const isGranted = result.success && (result.record ? result.record.status === 'Granted' : true);
+                        const boxColor = isGranted ? '#28a745' : '#dc3545';
+
+                        // Clear previous overlay
+                        octx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+                        overlayCanvas.width = video.videoWidth;
+                        overlayCanvas.height = video.videoHeight;
+
+                        // DRAW FACE BOX with scanning label (no name yet)
+                        if (result.facial_area) {
+                            const { x, y, w, h } = result.facial_area;
+                            octx.strokeStyle = boxColor;
+                            octx.lineWidth = 4;
+                            octx.strokeRect(x, y, w, h);
+                            octx.fillStyle = boxColor;
+                            octx.font = 'bold 18px Poppins, sans-serif';
+                            octx.fillText(result.recognised ? 'SCANNING...' : 'UNKNOWN', x, y - 12);
+                        }
+
+                        // ── LOCK-IN: once a record is confirmed, lock the overlay
+                        if (result.success && result.record) {
+                            const rec = result.record;
+
+                            // Store the confirmed identity
+                            lastRecognized = {
+                                name: rec.name,
+                                status: rec.status,
+                                confidence: rec.confidence,
+                                facial_area: result.facial_area
+                            };
+                            // Freeze scanning for LOCK_DURATION ms
+                            lockedUntil = Date.now() + LOCK_DURATION;
+
+                            // Draw locked name immediately
+                            if (result.facial_area) {
+                                octx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+                                const { x, y, w, h } = result.facial_area;
+                                const lockColor = rec.status === 'Granted' ? '#28a745' : '#dc3545';
+                                octx.strokeStyle = lockColor;
+                                octx.lineWidth = 4;
+                                octx.strokeRect(x, y, w, h);
+                                octx.fillStyle = lockColor;
+                                octx.font = 'bold 18px Poppins, sans-serif';
+                                octx.fillText(`✓ ${rec.name}`, x, y - 12);
+                            }
+
+                            // AUDIO: Alert only for unauthorized (Denied)
+                            if (rec.status !== 'Granted') playSound('error');
+
+                            updateOverlay(result, isSingleMode);
+
+                            // Instant table row insertion
+                            insertRowInstant(rec);
+
+                            // Instant stat update
+                            const prevTotal   = parseInt(statTotal.textContent)   || 0;
+                            const prevGranted = parseInt(statGranted.textContent) || 0;
+                            const prevDenied  = parseInt(statDenied.textContent)  || 0;
+                            animateStat(statTotal, prevTotal + 1);
+                            if (rec.status === 'Granted') animateStat(statGranted, prevGranted + 1);
+                            else                          animateStat(statDenied,  prevDenied  + 1);
+
+                            // Toast
+                            showToast(rec.name, rec.status, rec.confidence);
+
+                        } else {
+                            // No confirmed match — just show overlay without locking
+                            updateOverlay(result, isSingleMode);
+                            if (result.message === 'Face not recognized') {
+                                playSound('error'); // Alert for unauthorized/unknown
+                                showToast('Unknown', 'unknown', 0);
+                            }
+                        }
 
                     } catch (error) {
                         console.error('Recognition error:', error);
                     }
                 }
-            }, 2000);
+            }, 1000);
         }
 
         function updateOverlay(result, isSingleMode) {
             if (result.success) {
                 recognitionOverlay.style.display = 'block';
-                recName.textContent = result.name || result.record.name;
+                const role = result.role || (result.record ? result.record.role : "");
+                const nameAndRole = role ? `${result.name || result.record.name} (${role})` : (result.name || result.record.name);
+                recName.textContent = nameAndRole;
 
                 if (isSingleMode && !result.record) {
                     currentUser = {
@@ -1934,9 +2356,9 @@
                 }
             } else if (result.message === "Face not recognized") {
                 recognitionOverlay.style.display = 'block';
-                recName.textContent = "Unknown Face";
-                recStatus.innerHTML = `<i class="ri-error-warning-line"></i> Access Denied - Face not recognized`;
-                recStatus.className = 'rec-status status-denied';
+                recName.textContent = "Unrecognized Face";
+                recStatus.innerHTML = `<i class="ri-error-warning-line"></i> Please Adjust Your Position & Try Again`;
+                recStatus.className = 'rec-status status-unknown';
                 confirmationArea.style.display = 'none';
 
                 setTimeout(() => {
@@ -1969,6 +2391,12 @@
             }
         };
 
+        // =========================================
+        //  BACKGROUND SYNC (fallback polling)
+        //  Keeps stats & table in sync with the
+        //  server every 2 seconds as a safety net.
+        // =========================================
+
         async function fetchStats() {
             try {
                 const response = await fetch('/api/attendance/live');
@@ -1980,45 +2408,64 @@
                     if (!currentUser) window.location.href = 'attendance-control.html';
                 }
 
-                statTotal.textContent = data.stats.total;
-                statGranted.textContent = data.stats.granted;
-                statDenied.textContent = data.stats.denied;
+                // Sync stats (animated)
+                animateStat(statTotal, data.stats.total);
+                animateStat(statGranted, data.stats.granted);
+                animateStat(statDenied, data.stats.denied);
 
-                updateTable(data.logs);
+                // Sync table — rebuild but preserve animation class for new items
+                syncTable(data.logs);
 
             } catch (error) {
                 console.error('Error fetching stats:', error);
             }
         }
 
-        function updateTable(logs) {
+        /** Sync server logs into the table, adding animations only for genuinely new rows */
+        function syncTable(logs) {
+            const existingKeys = new Set();
+            tableBody.querySelectorAll('tr[data-key]').forEach(tr => {
+                existingKeys.add(tr.getAttribute('data-key'));
+            });
+
+            // Rebuild table from server data (authoritative)
             tableBody.innerHTML = '';
             logs.forEach(log => {
-                const row = document.createElement('tr');
-                const statusColor = log.status === 'Granted' ? '#28a745' : '#dc3545';
-                const statusBg = log.status === 'Granted' ? 'rgba(40, 167, 69, 0.2)' : 'rgba(220, 53, 69, 0.2)';
-
-                row.innerHTML = `
-                        <td>${log.time}</td>
-                        <td style="font-weight: 700; color: #ffffff; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">${log.name}</td>
-                        <td>
-                            <span style="color: ${statusColor}; background: ${statusBg}; padding: 0.25rem 0.75rem; border-radius: 1rem; font-weight: 600; font-size: 0.75rem; border: 1px solid ${statusColor}">
-                                ${log.status}
-                            </span>
-                        </td>
-                        <td>${log.confidence}%</td>
-                    `;
+                const row = buildRow(log);
+                const key = `${log.time}-${log.name}`;
+                // If this row wasn't in the table before, animate it
+                if (!existingKeys.has(key)) {
+                    row.classList.add('row-new');
+                }
                 tableBody.appendChild(row);
             });
         }
 
-        btnSaveFinal.addEventListener('click', async () => {
-            if (confirm('Permanently finalize and end the current session?')) {
-                await fetch('/api/attendance/session', { method: 'DELETE' });
-                alert('Session finalized and data stored successfully.');
-                window.location.href = 'attendance-control.html';
+        const btnStopSessionHeader = document.getElementById('btn-stop-session-header');
+
+        async function stopActiveSession() {
+            if (confirm('Are you sure you want to stop and finalize the current session? All data will be saved.')) {
+                try {
+                    const response = await fetch('/api/attendance/session', { method: 'DELETE' });
+                    const result = await response.json();
+                    if (result.success) {
+                        alert('Session stopped successfully.');
+                        window.location.href = 'attendance-control.html';
+                    } else {
+                        alert('Error stopping session: ' + result.message);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Failed to stop session.');
+                }
             }
-        });
+        }
+
+        if (btnStopSessionHeader) {
+            btnStopSessionHeader.addEventListener('click', stopActiveSession);
+        }
+
+        btnSaveFinal.addEventListener('click', stopActiveSession);
 
         async function applyRoleBasedUI() {
             try {
@@ -2030,9 +2477,9 @@
                     const sidebar = document.querySelector('.sidebar');
                     if (role === 'student') {
                         if (sidebar) sidebar.classList.add('sidebar--compact');
-                        ['nav-users', 'nav-attendance', 'nav-finance', 'nav-menu-mgmt', 'nav-reports', 'nav-settings', 'nav-feedback-list'].forEach(id => {
+                        ['nav-users', 'nav-attendance', 'nav-finance', 'nav-menu-mgmt', 'nav-reports', 'nav-settings', 'nav-feedback-list', 'nav-training'].forEach(id => {
                             const el = document.getElementById(id);
-                            if (el) el.style.display = 'none';
+                            if (el) el.remove();
                         });
                     } else {
                         if (sidebar) sidebar.classList.add('sidebar--compact');
@@ -2042,19 +2489,26 @@
                         if (navFeedback) navFeedback.style.display = 'none';
 
                         if (role === 'staff') {
-                            const settingsLink = document.getElementById('nav-settings');
-                            if (settingsLink) settingsLink.style.display = 'none';
+                            // Hide sensitive administration links from Staff
+                            ['nav-users', 'nav-finance', 'nav-reports', 'nav-training'].forEach(id => {
+                                const el = document.getElementById(id);
+                                if (el) el.style.display = 'none';
+                            });
                         }
                     }
                 }
             } catch (e) { }
         }
 
-        // Initialize
+        // =========================================
+        //  INITIALIZE
+        // =========================================
         startCamera();
         fetchStats();
         applyRoleBasedUI();
-        statsInterval = setInterval(fetchStats, 5000);
+
+        // Background sync every 2 seconds (safety net)
+        statsInterval = setInterval(fetchStats, 2000);
 
         window.addEventListener('beforeunload', () => {
             if (videoStream) {

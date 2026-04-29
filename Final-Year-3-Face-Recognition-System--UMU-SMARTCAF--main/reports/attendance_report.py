@@ -2,6 +2,29 @@ from attendance.attendance_service import get_attendance_records
 from users.user_service import get_user_by_id
 from datetime import datetime, timedelta
 
+def _to12h(time_str):
+    """Convert HH:MM:SS (24h) to h:MM AM/PM (12h)"""
+    if not time_str:
+        return time_str
+    try:
+        t = datetime.strptime(time_str.strip(), '%H:%M:%S')
+        return t.strftime('%I:%M %p').lstrip('0')  # e.g. 5:23 PM
+    except Exception:
+        return time_str
+
+def _infer_meal(time_str):
+    """Infer meal from time string HH:MM:SS"""
+    if not time_str:
+        return None
+    try:
+        h = int(time_str.split(':')[0])
+        if 4 <= h < 11:  return 'breakfast'
+        if 11 <= h < 16: return 'lunch'
+        if 16 <= h < 23: return 'supper'
+    except Exception:
+        pass
+    return None
+
 def generate_attendance_report(start_date=None, end_date=None, meal_type=None, department=None, user_id=None):
     # Filter logs based on criteria
     filtered_logs = []
@@ -16,41 +39,48 @@ def generate_attendance_report(start_date=None, end_date=None, meal_type=None, d
     for log in logs:
         # Date filtering
         log_date = log.get('Date')
-        log_time = log.get('Time')
+        log_time = log.get('Time', '')
         if not log_date:
             continue
             
         if log_date < start_date or log_date > end_date:
             continue
             
-        # User ID filtering
-        id_in_log = log.get('User ID')
-        if user_id and str(id_in_log) != str(user_id):
-            continue
+        # User ID / name filtering — use separate variable to avoid shadowing the filter param
+        log_user_id = log.get('User ID')
+        # Name is already stored in CSV — no lookup needed for display
+        csv_name = log.get('Name', '').strip() or f"User {log_user_id}"
+
+        if user_id and str(log_user_id).lower() != str(user_id).lower():
+            # Also try name-based match
+            if user_id.lower() not in csv_name.lower():
+                continue
             
-        # Meal filtering (Assuming 'Status' might contain meal info or we skip this for now)
-        # In a real system, we'd store the session/meal type in the log.
-        # For now, we'll just pass through if meal_type is 'all' or not specified.
+        # Meal filtering — infer from time
         if meal_type and meal_type != 'all':
-             # Placeholder: If we stored meal type, we'd check it here.
-             pass
-            
-        # Department filtering (Mocking department check)
+            inferred = _infer_meal(log_time)
+            if inferred != meal_type.lower():
+                continue
         
-        # Fetch user details
-        user_id = log.get('User ID')
-        user = get_user_by_id(user_id)
-        user_name = user['name'] if user else f"User {user_id}"
+        # Fetch user details for department (not for name — name comes from CSV)
+        user = get_user_by_id(log_user_id)
+        department = (user.get('department') or user.get('dept') or '-') if user else '-'
+
+        time_24 = log_time  # raw 24h string
+        time_12 = _to12h(log_time)  # 12h formatted
 
         # Standardize log format for frontend
         formatted_log = {
-            "id": user_id,
-            "name": user_name,
-            "timestamp": f"{log_date} {log_time}",
+            "id": log_user_id,
+            "name": csv_name,          # Full name from CSV
+            "department": department,  # from user profile
+            "timestamp": f"{log_date} {time_12}",
             "date": log_date,
-            "time": log_time,
-            "session": "General", # Placeholder session
-            "status": log.get('Status')
+            "time": time_12,           # 12-hour format
+            "time_raw": time_24,       # kept for meal inference
+            "session": "General",
+            "status": log.get('Status'),
+            "confidence": log.get('Confidence', '-')
         }
         filtered_logs.append(formatted_log)
         

@@ -5,7 +5,7 @@
         "category": "Drink",
         "description": "Sweet and refreshing mango juice made from fresh Ugandan mangoes.",
         "image_path": "data/menu_images/e921eb23-75cb-407f-b4c1-8b3f4b738af6_pexels-kowalievska-1393302.jpg",
-        "price": 2000,
+        "price": 0,
         "ratings": {
             "likes": 6,
             "dislikes": 3
@@ -20,7 +20,7 @@
         "name": "Chips fries",
         "category": "Meal",
         "description": "Golden crispy potato fries served with tomato ketchup and a side of salad.",
-        "image_path": "data/menu_images/c2bab146-952d-4731-8576-41fc8911eb29_pexels-kalz-michael-1277172-2498440.jpg",
+        "image_path": "data/menu_images/c2bab146-952d-4731-8576-41fc8911eb29_1777431453.webp",
         "price": 5000,
         "ratings": {
             "likes": 1,
@@ -34,7 +34,7 @@
     {
         "id": "0044eab9-e404-4122-9cd2-307fb065dabd",
         "name": "Cold Coca Cola soda",
-        "category": "Meal",
+        "category": "Drink",
         "description": "Cold Coca Cola soda sold at 1,000/=",
         "image_path": "data/menu_images/0044eab9-e404-4122-9cd2-307fb065dabd_pexels-asphotography-104509.jpg",
         "price": 1000,
@@ -42,7 +42,7 @@
             "likes": 1,
             "dislikes": 2
         },
-        "time_served": "Breakfast",
+        "time_served": "All Day",
         "date": "2025-12-24",
         "is_available": true,
         "created_at": "2025-12-24T10:08:43.025771"
@@ -52,7 +52,7 @@
         "name": "Fried Rice",
         "category": "Meal",
         "description": "Very delicious fried brown rice ",
-        "image_path": "data/menu_images/f2f0906c-b416-4259-8dd4-7a01bb3763cb_pexels-bishop-tamrakar-2246201-3926133.jpg",
+        "image_path": "data/menu_images/f2f0906c-b416-4259-8dd4-7a01bb3763cb_1777431477.webp",
         "price": 0,
         "ratings": {
             "likes": 0,
@@ -62,5 +62,101 @@
         "date": "2025-12-26",
         "is_available": true,
         "created_at": "2025-12-26T09:17:04.054419"
+    },
+    {
+        "id": "5acb8193-a6a9-4f4c-afaf-114affd694ed",
+        "name": "Matooke & Beef",
+        "category": "Meal",
+        "description": "Delicious meal of Matooke & Beef",
+        "image_path": "data/menu_images/5acb8193-a6a9-4f4c-afaf-114affd694ed_1777432570.webp",
+        "price": 0,
+        "ratings": {
+            "likes": 0,
+            "dislikes": 0
+        },
+        "time_served": "Breakfast",
+        "date": "2026-04-29",
+        "is_available": true,
+        "created_at": "2026-04-29T06:16:10.472672"
+    },
+    {
+        "id": "f262a0b0-1972-4d98-9726-7053ca628810",
+        "name": "Delicious Plantain Banana",
+        "category": "Meal",
+        "description": "Hot Delicious Plantain Banana meal with ovacado",
+        "image_path": "data/menu_images/f262a0b0-1972-4d98-9726-7053ca628810_1777432840.webp",
+        "price": 0,
+        "ratings": {
+            "likes": 0,
+            "dislikes": 0
+        },
+        "time_served": "Breakfast",
+        "date": "2026-04-29",
+        "is_available": true,
+        "created_at": "2026-04-29T06:20:09.027039"
+    },
+    {
+        "id": "9a353ef2-ae44-42fc-9c63-dd3314847b07",
+        "name": "Fried Chicken & Rice",
+        "category": "Meal",
+        "description": "Delicious Fried Chicken & Rice ",
+        "image_path": "data/menu_images/9a353ef2-ae44-42fc-9c63-dd3314847b07_1777433154.webp",
+        "price": 0,
+        "ratings": {
+            "likes": 0,
+            "dislikes": 0
+        },
+        "time_served": "Supper",
+        "date": "2026-04-29",
+        "is_available": true,
+        "created_at": "2026-04-29T06:25:54.938063"
+    },
+    {
+        "id": "1ba8e47a-3b45-4ffe-93f4-cda025371166",
+        "name": "Lucozade Original Drink",
+        "category": "Drink",
+        "description": "Lucozade Original Drink",
+        "image_path": "data/menu_images/1ba8e47a-3b45-4ffe-93f4-cda025371166_1777433854.webp",
+        "price": 5000,
+        "ratings": {
+            "likes": 0,
+            "dislikes": 0
+        },
+        "time_served": "All Day",
+        "date": "2026-04-29",
+        "is_available": true,
+        "created_at": "2026-04-29T06:30:19.633654"
+    },
+    {
+        "id": "66f789c3-ff57-46a9-9034-579a99b42eaf",
+        "name": "Rwenzori Water",
+        "category": "Drink",
+        "description": "Rwenzori Water Small Size Bottle",
+        "image_path": "data/menu_images/66f789c3-ff57-46a9-9034-579a99b42eaf_1777433681.webp",
+        "price": 1000,
+        "ratings": {
+            "likes": 0,
+            "dislikes": 0
+        },
+        "time_served": "All Day",
+        "date": "2026-04-29",
+        "is_available": true,
+        "created_at": "2026-04-29T06:34:13.103599"
+    },
+    {
+        "id": "f7e02a6f-6457-48c6-999b-70b675e5874c",
+        "name": "G.nut  and matooke delicious meal ",
+        "category": "Meal",
+        "description": "G.nut  and matooke delicious meal with fresh greens",
+        "image_path": "data/menu_images/f7e02a6f-6457-48c6-999b-70b675e5874c_1777434091.webp",
+        "price": 0,
+        "ratings": {
+            "likes": 0,
+            "dislikes": 0
+        },
+        "time_served": "Lunch",
+        "date": "2026-04-29",
+        "is_available": true,
+        "created_at": "2026-04-29T06:40:46.115048"
     }
 ]

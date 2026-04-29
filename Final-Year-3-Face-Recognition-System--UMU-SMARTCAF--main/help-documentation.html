@@ -247,8 +247,7 @@
         }
 
 
-        
-            
+        :root {
             --body-font: "Poppins", sans-serif;
             --h1-font-size: 1.75rem;
             --normal-font-size: 1rem;
@@ -404,9 +403,7 @@
             opacity: 0.7;
         }
 
-        
-        }
-    
+
         
         
     
@@ -1608,15 +1605,7 @@
     </div>
 
     <script>
-        );
-            const clockElement = document.getElementById('realtime-clock');
-            if (clockElement) {
-                clockElement.textContent = timeString;
-            }
-        }
 
-        
-         // Initial call
     
         
     
@@ -1634,9 +1623,9 @@
                     const sidebar = document.querySelector('.sidebar');
                     if (role === 'student') {
                         if (sidebar) sidebar.classList.add('sidebar--compact');
-                        ['nav-users', 'nav-attendance', 'nav-finance', 'nav-menu-mgmt', 'nav-reports', 'nav-settings', 'nav-feedback-list'].forEach(id => {
+                        ['nav-users', 'nav-attendance', 'nav-finance', 'nav-menu-mgmt', 'nav-reports', 'nav-settings', 'nav-feedback-list', 'nav-training'].forEach(id => {
                             const el = document.getElementById(id);
-                            if (el) el.style.display = 'none';
+                            if (el) el.remove();
                         });
                     } else {
                         if (sidebar) sidebar.classList.add('sidebar--compact');
@@ -1646,8 +1635,11 @@
                         if (navFeedbackList) navFeedbackList.style.display = 'block';
                         if (navFeedback) navFeedback.style.display = 'none';
                         if (role === 'staff') {
-                            const settingsLink = document.getElementById('nav-settings');
-                            if (settingsLink) settingsLink.style.display = 'none';
+                            // Hide sensitive administration links from Staff
+                            ['nav-users', 'nav-finance', 'nav-reports', 'nav-training'].forEach(id => {
+                                const el = document.getElementById(id);
+                                if (el) el.style.display = 'none';
+                            });
                         }
                     }
                 }

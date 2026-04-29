@@ -75,3 +75,34 @@ def remove_item(item_id):
 def toggle_status(item_id):
     success, message = toggle_availability(item_id)
     return jsonify({"success": success, "message": message})
+
+@menu_bp.route('/api/admin/menu/bulk-upload', methods=['POST'])
+def bulk_upload_menu():
+    if 'file' not in request.files:
+        return jsonify({"success": False, "message": "No file uploaded"}), 400
+    
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({"success": False, "message": "No file selected"}), 400
+    
+    try:
+        import pandas as pd
+        import io
+        
+        filename = file.filename.lower()
+        if filename.endswith('.csv'):
+            df = pd.read_csv(io.StringIO(file.stream.read().decode("UTF8")), sep=None, engine='python')
+        elif filename.endswith(('.xls', '.xlsx')):
+            df = pd.read_excel(file)
+        else:
+            return jsonify({"success": False, "message": "Unsupported file format. Use CSV or Excel."}), 400
+            
+        items_list = df.to_dict(orient='records')
+        from menu.menu_service import bulk_add_menu_items
+        success, message = bulk_add_menu_items(items_list)
+        
+        return jsonify({"success": success, "message": message})
+        
+    except Exception as e:
+        print(f"Bulk upload error: {e}")
+        return jsonify({"success": False, "message": f"Processing error: {str(e)}"}), 500

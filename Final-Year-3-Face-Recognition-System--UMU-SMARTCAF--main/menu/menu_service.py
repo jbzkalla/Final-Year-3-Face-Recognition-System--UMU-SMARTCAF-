@@ -220,3 +220,50 @@ def delete_menu_items_bulk(item_ids):
         
         return True, f"Deleted {initial_len - len(items)} items"
     return False, "No items found to delete"
+
+def bulk_add_menu_items(items_list):
+    """Processes a list of menu items (e.g. from CSV)."""
+    existing_items = read_json(MENU_FILE)
+    added_count = 0
+    
+    for data in items_list:
+        item_id = str(uuid.uuid4())
+        
+        # Clean price (handle strings with commas or decimals)
+        price_raw = data.get('Price', data.get('price', 0))
+        try:
+            if isinstance(price_raw, str):
+                price_raw = price_raw.replace(',', '').replace('UGX', '').strip()
+            price = int(float(price_raw)) if price_raw else 0
+        except:
+            price = 0
+
+        # Clean category and time served (capitalize)
+        category = str(data.get('Category', data.get('category', 'Meal'))).strip().capitalize()
+        time_served = str(data.get('Time Served', data.get('time_served', 'Lunch'))).strip().capitalize()
+        if time_served == 'Allday': time_served = 'All Day'
+        
+        new_item = {
+            "id": item_id,
+            "name": str(data.get('Name', data.get('name', 'Unknown Meal'))).strip(),
+            "category": category,
+            "description": str(data.get('Description', data.get('description', ''))).strip(),
+            "image_path": "static/images/default-meal.png",
+            "price": price,
+            "ratings": {"likes": 0, "dislikes": 0},
+            "time_served": time_served,
+            "date": str(data.get('Date', data.get('date', datetime.now().strftime('%Y-%m-%d')))).strip(),
+            "is_available": True,
+            "created_at": datetime.now().isoformat()
+        }
+        existing_items.append(new_item)
+        added_count += 1
+        
+    write_json(MENU_FILE, existing_items)
+    
+    # Audit log
+    from flask import session
+    user = session.get('user', {})
+    log_action(user.get('email', 'System'), "BULK_ADD_MENU", f"Bulk added {added_count} items")
+    
+    return True, f"Successfully added {added_count} items"

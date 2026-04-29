@@ -1,9 +1,11 @@
-from utils.constants import ATTENDANCE_FILE, DATA_DIR, BASE_DIR
-from data.file_manager import ensure_directory
-from utils.time_utils import get_current_date, get_current_time
-from users.user_service import get_user_by_id
 import os
 import csv
+import time as time_module
+from utils.constants import ATTENDANCE_FILE, DATA_DIR, BASE_DIR, SCAN_COOLDOWN_SECONDS
+
+# In-memory cache to track last successful scan per user
+# Format: { user_id: timestamp }
+LAST_SCANNED_CACHE = {}
 
 def mark_attendance(user_id, confidence=0):
     """
@@ -14,6 +16,26 @@ def mark_attendance(user_id, confidence=0):
     
     date = get_current_date()
     time = get_current_time()
+    
+    # ── SCAN COOLDOWN LOGIC ──
+    global LAST_SCANNED_CACHE
+    current_ts = time_module.time()
+    user_id_str = str(user_id)
+    
+    if user_id_str in LAST_SCANNED_CACHE:
+        last_ts = LAST_SCANNED_CACHE[user_id_str]
+        if (current_ts - last_ts) < SCAN_COOLDOWN_SECONDS:
+            # Still in cooldown - return success but skip logging
+            return {
+                "success": True,
+                "message": "Cooldown active",
+                "record": {
+                    "name": get_user_by_id(user_id).get('name', 'User') if get_user_by_id(user_id) else "User",
+                    "status": "Cooldown Active",
+                    "confidence": confidence,
+                    "time": time
+                }
+            }
     
     user = get_user_by_id(user_id)
     name = user['name'] if user else "Unknown User"
@@ -49,6 +71,9 @@ def mark_attendance(user_id, confidence=0):
                 writer.writerow(["User ID", "Name", "Date", "Time", "Status", "Confidence"])
             writer.writerow([user_id, name, date, time, access_status, confidence])
             
+        # Update cooldown cache
+        LAST_SCANNED_CACHE[user_id_str] = current_ts
+        
         return {
             "success": True, 
             "record": {

@@ -1,5 +1,5 @@
 flask
-opencv-python-headless
+opencv-python
 numpy
 pandas
 openpyxl
@@ -7,3 +7,7 @@ xlrd
 gunicorn
 Pillow
 python-dotenv
+deepface
+tf-keras
+mtcnn
+scipy
