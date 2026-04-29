@@ -154,12 +154,41 @@ For the initial system setup, the following default credentials are provided:
 
 *Note: Passwords can be changed by users during signup or in their account settings.*
 
+---
+
+## How to Run the System
+
+To run the system for a live presentation, follow these steps:
+
+### 1. Start the Production Server
+Open a terminal in the project directory and run:
+```powershell
+python wsgi.py
+```
+*   This starts the system on **port 8080**.
+*   Keep this terminal open during the demo.
+
+### 2. Start the Online Link (Ngrok)
+Open a **second** terminal window in the project directory and run:
+```powershell
+.\ngrok.exe http 8080
+```
+*   Wait for the "Forwarding" link to appear (e.g., `https://xxxx.ngrok-free.app`).
+
+### 3. Accessing the System
+*   **Local Access:** Open your browser and go to `http://localhost:8080`.
+*   **Mobile/Online Access:** Share the **Ngrok Forwarding link** with any device.
+
+---
+
 ## Requirements
 - Python 3.8+
-- Flask
+- Flask, Waitress
 - OpenCV (`opencv-python`)
-- NumPy
-- Pandas
-- OpenPyXL
+- NumPy, Pandas, OpenPyXL
 
 See `requirements.txt` for the full list.
+
+**Ngrok Setup Note:**
+The system is configured with the following authtoken:
+`3D1SnqbW3gzhTOdNGzR07S9br7x_279RMj6YaP2K9aQR2214H`
