@@ -11,3 +11,4 @@ deepface
 tf-keras
 mtcnn
 scipy
+waitress
